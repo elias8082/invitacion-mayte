@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis XV - La Princesa y el Sapo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carattere&family=Dancing+Script:wght@400..700&family=Kapakana:wght@300..400&family=Rochester&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  
+  <!-- Ícono de Font Awesome (puedes ponerlo en el <head>) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    overflow-x: hidden;      /* ✅ Oculta solo scroll horizontal */
+    overflow-y: auto;        /* ✅ Permite scroll vertical manual */
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: white;
+  }
+
+  #portada {
+    height: 100vh;
+    background: url('img/SAPO01.jpeg') no-repeat center center/cover;
+    /*display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;*/
+    color: #134915;
+  }
+  #portada button {
+    /*margin-top: 20px;*/
+    font-size: 28px;
+    /*padding: 1rem 2rem;*/
+    cursor: pointer;
+    border: none;
+    border-radius: 40px;
+    background: #9f7d18;
+    color: #ffffff;
+  }
+  
+  #contenido {
+  display: none;               /* oculto al principio */
+  height: 100vh;
+  overflow-y: scroll;         /* scroll vertical */
+  scroll-snap-type: y mandatory; /* scroll snap para bloques */
+  scroll-behavior: smooth;    /* scroll suave */
+  position: relative;
+}
+
+.bloque {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;   /* cada bloque encaja al inicio */
+  box-sizing: border-box;
+  /*padding: 20px;*/
+}
+
+  .bloque.active {
+    top: 0;
+    position: relative;
+  }
+
+  .bloque1 {  background-image: url('img/fondo_portada.png');
+  background-size: cover;       /* Para que la imagen cubra todo el div */
+  background-position: center;  /* Centra la imagen dentro del div */
+  background-repeat: no-repeat; /* No repite la imagen */ }
+  .bloque2 {  background-image: url('img/fondo_bloque02.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 100vh; /* altura mínima: 100% del alto de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem; }
+  .bloque3 {  background-image: url('img/fondo_bloque03.png');
+    background-size: cover;       /* Para que la imagen cubra todo el div */
+    background-position: center;  /* Centra la imagen dentro del div */
+    background-repeat: no-repeat; /* No repite la imagen */ }
+  .bloque4 { background-image: url('img/fondo_bloque04.png');
+    background-size: cover;       /* Para que la imagen cubra todo el div */
+    background-position: center;  /* Centra la imagen dentro del div */
+    background-repeat: no-repeat; /* No repite la imagen */ 
+    width: 100%;
+    min-height: 100vh; /* altura mínima: 100% del alto de la ventana */   
+    
+    align-items: center;
+    padding: 2rem;}
+  .bloque5 { background-image: url('img/fondo_bloque05.png');
+    background-size: cover;       /* Para que la imagen cubra todo el div */
+    background-position: center;  /* Centra la imagen dentro del div */
+    background-repeat: no-repeat; /* No repite la imagen */ }
+  .bloque6 { background-image: url('img/fondo_bloque06.png');
+    background-size: cover;       /* Para que la imagen cubra todo el div */
+    background-position: center;  /* Centra la imagen dentro del div */
+    background-repeat: no-repeat; /* No repite la imagen */ }
+  .bloque7 { background-image: url('img/fondo_fin.png');
+    background-size: cover;       /* Para que la imagen cubra todo el div */
+    background-position: center;  /* Centra la imagen dentro del div */
+    background-repeat: no-repeat; /* No repite la imagen */ }
+
+    .boton-maps-elegante {
+    display: inline-block;
+    background: linear-gradient(135deg, #134915, #0f9d58);
+    color: #fff;
+    padding: 14px 26px;
+    font-size: 18px;
+    border: none;
+    border-radius: 40px;
+    font-family: 'Charm', sans-serif;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+  .boton-maps-elegante i {
+    margin-right: 10px;
+}
+  .boton-maps-elegante:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #134915, #0f9d58);
+}
+
+
+.cuenta-regresiva {
+    text-align: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    /*margin-top: 3rem;*/
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+  .cuenta-regresiva h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #9f7d18;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+  .tiempo {
+    display: grid;
+    grid-template-columns: repeat(2, auto); /* 2 columnas */
+    justify-content: center;
+    gap: 20px;
+}
+
+  .tiempo div {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    min-width: 80px;
+    box-shadow: 0 0 10px #88b554;
+    transition: transform 0.3s ease;
+}
+
+  .tiempo div:hover {
+    transform: scale(1.1);
+}
+
+  .tiempo span {
+    font-size: 32px;
+    display: block;
+    color: #9f7d18;
+}
+
+  .tiempo small {
+    font-size: 14px;
+    color: #ccc;
+}
+
+ /* Partículas */
+    .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 999;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: #d4af3766;
+      border-radius: 50%;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px white;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+ 
+#boton {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+  }
+
+  /* Animación que hace fadeIn, stay visible, fadeOut y stay oculto */
+  @keyframes fadeInOut {
+    0%, 20% { opacity: 0; }
+    30%, 70% { opacity: 1; }
+    80%, 100% { opacity: 0; }
+  }
+
+  /* Clase para la animación de fadeInOut en loop */
+  .fadeInOutLoop {
+    animation: fadeInOut 6s infinite;
+  }
+
+  /* Retraso para el segundo texto */
+  .fadeInOutLoop.delay {
+    opacity: 0;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  
+
+
+  
+</style>
+</head>
+<body>
+
+ 
+  <!-- Música de fondo -->
+  <audio id="musicaFondo" autoplay loop>
+    <source src="img/princes_sapo.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Partículas mágicas -->
+  <div class="particles" id="particles"></div>
+
+<div id="portada"> 
+
+  
+  <h1 class="animate__animated animate__fadeInDown fadeInOutLoop" style="font-family: 'Great Vibes', cursive; font-size: 48px; text-align: center; top: 10%;
+    position: relative;">
+    Érase una vez...
+  </h1>
+  <h2 class="animate__animated animate__fadeInUp animate__delay-1s fadeInOutLoop delay" style="font-family: 'Great Vibes', cursive; font-size: 36px; text-align: center; top: 11%;
+    position: relative;">
+    una princesa lista para brillar ✨
+  </h2>
+ <!--<h1 style="text-align: center; font-size: 60px; font-family: 'Great Vibes', cursive; --animate-duration: 2s;" class="animate__animated animate__backInDown animate__delay-0s">Invitacion especial</h1>-->
+    <!--<p style="font-size: 40px; font-family: 'Great Vibes', cursive; --animate-duration: 2s; " class="animate__animated animate__bounceInLeft animate__delay-2s">Con la magia de un cuento...<br>¡Te espero en mi gran día!</p>-->
+  <button id="boton" onclick="iniciarPresentacion()" class="animate__animated animate__fadeIn animate__delay-3s" style="font-size: 36px; font-family: 'Great Vibes', cursive; ">Entrar al reino</button>
+
+</div>
+
+<div id="contenido">
+
+  <div class="bloque bloque1 active">
+    <div style="position: relative; top: 8%;">
+      <p class="animate__animated animate__fadeInLeft" style="color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; --animate-duration: 1.5s;">Mis XV Años</p>  
+    <center><img src="img/marco004.png" alt="Imagen responsiva" class="img-fluid animate__animated animate__fadeInDown animate__delay-1s" style="--animate-duration: 2s;"></center>      
+    <p class="animate__animated animate__zoomIn animate__delay-2s" style="color: #9f7d18; font-size: 90px; text-align: center; font-family: 'Rochester', cursive; --animate-duration: 1.5s;">Lia Mayte</p>
+  </div>
+  </div>
+
+
+  
+
+  <div class="bloque bloque2">
+    <div style="position: relative; top: 0%;">
+    <p class="animate__animated animate__fadeInUp" style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+
+      Con la guía de Dios
+      y el amor incondicional de mis padres,
+      hoy me llena de alegría poder compartir
+      un instante tan significativo en mi vida.
+      Ha llegado el momento de cerrar una etapa,
+      dejar atrás mi niñez,
+      y dar los primeros pasos hacia un camino nuevo,
+      lleno de esperanzas, ilusiones
+      y sueños.
+
+      </p>
+    </div>
+    </div>
+
+
+   
+
+
+    <div class="bloque bloque3">
+      <div style="position: relative; top: 10%;">
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 0s; color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           En compañía de
+        </p>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 1s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Mis Padres
+        </p>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 2s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Ivon Chavez Garcia
+        </p>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 3s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Jose Carlos Infante Arenas
+        </p>
+    
+        <center>
+          <img src="img/pleca_invite01.png"
+               alt="Imagen responsiva"
+               class="img-fluid animate__animated animate__fadeInDown"
+               style="animation-delay: 4s; width: 280px; --animate-duration: 2s;">
+        </center>
+    
+        <br>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 5s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Mis Padrinos
+        </p>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 6s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Lina Miriam Chavez Garcia
+        </p>
+    
+        <p class="animate__animated animate__fadeInRight"
+           style="animation-delay: 7s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+           Cristian Toledano Huipio
+        </p>
+      </div>
+    </div>
+    
+
+
+  <div class="bloque bloque4">
+    <div style="position: relative; top: 10%;">
+    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive; margin-top: 24px;">¡Te invito! </p>         
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">A que me acompañes a celebrar
+      una noche encantada donde los sueños se hacen realidad...</p> 
+      <p style="color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive;">Sábado</p>
+      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">02 - Agosto - 2025</p>  
+      <p style="color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive;">¡No Faltes!</p> 
+    </div>
+    </div>
+
+
+
+  <div class="bloque bloque5">
+    <div style="position: relative; top: 10%;">
+    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">Ceremonia</p>         
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">Parroquia de la resurección del señor<br>
+      Hora: 18:00 hrs </p>
+     <center><a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank" class="boton-maps-elegante">
+      <i class="fas fa-map-marker-alt"></i> Ver ubicación
+      </a></center>
+      <p style="padding-top: 24px;"></p>
+      <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">Recepcion </p>         
+      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">Calle itzopan manzana B43, Lt33, colonia azteca tercera.<br>
+        <center><a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank" class="boton-maps-elegante">
+          <i class="fas fa-map-marker-alt"></i> Ver ubicación
+        </a></center>
+      </p>
+    </div>
+  </div>
+
+
+
+
+  <div class="bloque bloque6"> 
+    <div style="position: relative; top: 10%;">    
+    <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Solo Faltan </p>         
+              
+    <!-- Contenedor de la cuenta regresiva -->
+    <div class="cuenta-regresiva">
+    
+      <div class="tiempo">
+        <div><span id="dias">00</span><small>Días</small></div>
+        <div><span id="horas">00</span><small>Horas</small></div>
+        <div><span id="minutos">00</span><small>Minutos</small></div>
+        <div><span id="segundos">00</span><small>Segundos</small></div>
+      </div>
+    </div>              
+
+<p style="padding-top: 16px;"></p>
+
+<p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Confirmar Asistencia <br> <span style="color: #134915; font-size: 28px; text-align: center; font-family: 'Great Vibes', cursive;">Via WhatsApp </span></p> 
+
+<p style="color: #9f7d18; font-size: 38px; text-align: center; font-family: 'Great Vibes', cursive;">La pista de baile ya está lista...
+  ¡Sólo faltas tú! </p>            
+
+  <!-- Botón -->
+<!-- Botón de WhatsApp -->
+<center><a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" 
+target="_blank">
+<img src="img/WhatsApp.svg.webp" class="animate__animated animate__animate__pulse" alt="Confirmar por WhatsApp" style="width:80px; height:auto; --animate-duration: 2s;">
+</a></center>
+<p style="padding-top: 24px;"></p>
+</div>
+</div>
+
+
+
+
+<div class="bloque bloque7">
+  <div style="position: relative; top: 10%;"> 
+  <p style="color: #9f7d18; font-size: 65px; text-align: center; font-family: 'Great Vibes', cursive;">
+    ¡Te esperamos!
+  </p>
+</div>
+</div>
+
+
+<script>
+  const bloques = document.querySelectorAll('.bloque');
+  const animaciones = [
+    'animate__bounceInLeft',
+    'animate__fadeInUp',
+    'animate__fadeInRight',
+    'animate__zoomIn',
+    'animate__flipInX',
+    'animate__fadeInDown',
+    'animate__fadeInLeft'
+  ];
+  
+  // Aplica animaciones con delay a los p e img dentro de cada bloque
+  function aplicarAnimacionAlBloque(bloque, animacion) {
+    if (!bloque) return;
+  
+    const elementos = bloque.querySelectorAll('p, img');
+    const botones = bloque.querySelectorAll('.boton-maps-elegante'); // ✅ Esta línea es crucial
+  
+    elementos.forEach((el, i) => {
+      const isImage = el.tagName.toLowerCase() === 'img';
+      const anim = isImage ? 'animate__fadeInDown' : animacion;
+      const delay = `${i}s`;
+  
+      // Quitar animaciones previas
+      el.classList.remove('animate__animated', anim);
+      el.style.animationDelay = '0s';
+      el.style.setProperty('--animate-duration', '0s');
+      void el.offsetWidth; // reflow para reiniciar animación
+  
+      // Aplicar animación con delay y duración
+      el.classList.add('animate__animated', anim);
+      el.style.animationDelay = delay;
+      el.style.setProperty('--animate-duration', '2s');
+    });
+
+    // Animar los botones con animate__fadeIn después del último texto
+  botones.forEach((boton, j) => {
+    const delayBoton = `${elementos.length + j}s`;
+    const botonAnimacion = 'animate__fadeIn';
+
+    // Reiniciar animación
+    boton.classList.remove('animate__animated', botonAnimacion);
+    boton.style.animationDelay = '0s';
+    boton.style.setProperty('--animate-duration', '0s');
+    void boton.offsetWidth;
+
+    // Aplicar animación solo una vez
+    boton.classList.add('animate__animated', botonAnimacion);
+    boton.style.animationDelay = delayBoton;
+    boton.style.setProperty('--animate-duration', '1.5s');
+  });
+  }
+  
+  // Scroll automático con animación
+  let indiceActual = 0;
+  let intervaloPresentacion;
+  
+  function mostrarBloque(indice) {
+    if (bloques[indice]) {
+      bloques[indice].scrollIntoView({ behavior: 'smooth' });
+      aplicarAnimacionAlBloque(bloques[indice], animaciones[indice]);
+    }
+  }
+  
+  function iniciarPresentacion() {
+    document.getElementById('portada').style.display = 'none';
+    document.getElementById('contenido').style.display = 'block';
+    const musica = document.getElementById('musicaFondo');
+    if (musica) musica.play();
+  
+    indiceActual = 0;
+    mostrarBloque(indiceActual);
+  
+    intervaloPresentacion = setInterval(() => {
+      indiceActual++;
+      if (indiceActual >= bloques.length) {
+        clearInterval(intervaloPresentacion);
+        return;
+      }
+      mostrarBloque(indiceActual);
+    }, 10000); // Duración por bloque antes de cambiar
+  }
+  
+  // IntersectionObserver para animar al hacer scroll manual
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bloque = entry.target;
+        const index = [...bloques].indexOf(bloque);
+        if (index !== -1) {
+          aplicarAnimacionAlBloque(bloque, animaciones[index]);
+        }
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+  
+  bloques.forEach(bloque => observer.observe(bloque));
+
+  // Animar botones de ubicación
+//const botonesMaps = document.querySelectorAll('.boton-maps-elegante');
+//botonesMaps.forEach(boton => {
+ // boton.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
+//});
+  
+  
+  
+  // Código de partículas mágicas
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = 6 + Math.random() * 6 + 's';
+    p.style.opacity = Math.random();
+    p.style.animationDelay = Math.random() * 10 + 's';
+    particlesContainer.appendChild(p);
+  }
+  
+  const sparkleContainer = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('div');
+    s.classList.add('sparkle');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDelay = Math.random() * 5 + 's';
+    sparkleContainer.appendChild(s);
+  }
+  
+  // Cuenta regresiva
+  let intervaloCuentaRegresiva;
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
+  
+    function actualizarCuenta() {
+      const ahora = new Date().getTime();
+      const diferencia = fechaEvento - ahora;
+  
+      if (diferencia <= 0) {
+        document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
+        clearInterval(intervaloCuentaRegresiva);
+        return;
+      }
+  
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+  
+      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
+      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
+      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
+      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
+    }
+  
+    intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
+    actualizarCuenta();
+  });
+  
+  // Animación infinita del botón después de la portada
+  setTimeout(() => {
+    document.getElementById('boton').classList.add('animate__pulse', 'animate__infinite');
+  }, 2000);
+  </script>
+  
+
+
+</body>
+</html>
