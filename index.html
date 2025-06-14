@@ -637,21 +637,13 @@ target="_blank">
   let indiceActual = 0;
   let intervaloPresentacion;
 
-  function mostrarBloque(indice) {
-    const bloque = bloques[indice];
-    if (!bloque) return;
+ function mostrarBloque(indice) {
+  const bloque = bloques[indice];
+  if (!bloque) return;
 
-    if (indice === bloques.length - 1 && esIOS()) {
-      // No usar scrollIntoView en iOS para último bloque
-      window.scrollTo({ top: bloque.offsetTop, behavior: 'smooth' });
-    } else if (indice === bloques.length - 1) {
-      // No hacer nada, ya estamos en el último
-    } else {
-      bloque.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    aplicarAnimacionAlBloque(bloque, animaciones[indice]);
-  }
+  bloque.scrollIntoView({ behavior: 'smooth' });
+  aplicarAnimacionAlBloque(bloque, animaciones[indice]);
+}
 
   function iniciarPresentacion() {
     document.getElementById('portada').style.display = 'none';
