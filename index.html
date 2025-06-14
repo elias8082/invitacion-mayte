@@ -346,10 +346,7 @@
   }
 }
 
-body.no-scroll {
-  overflow: hidden !important;
-  touch-action: none !important;
-}
+
   
 </style>
 </head>
@@ -375,7 +372,7 @@ body.no-scroll {
 
     <!-- Título principal -->
     <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez... </p>
+    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...44 </p>
  
  <!-- Subtítulo -->
  <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
@@ -416,7 +413,7 @@ body.no-scroll {
 
   <div class="bloque bloque1 active">
     <div style="position: relative; top: 5%;">
-      <p class="animate__animated animate__fadeInLeft" style="color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; --animate-duration: 1.5s;">Mis XV Año555s</p>  
+      <p class="animate__animated animate__fadeInLeft" style="color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; --animate-duration: 1.5s;">Mis XV Años</p>  
     <center><img src="img/marco004.png" alt="Imagen responsiva" class="img-fluid animate__animated animate__fadeInDown animate__delay-1s" style="--animate-duration: 2s;"></center>      
     <p class="animate__animated animate__zoomIn animate__delay-2s" style="color: #9f7d18; font-size: 90px; text-align: center; font-family: 'Rochester', cursive; --animate-duration: 1.5s;">Lia Mayte</p>
   </div>
@@ -757,47 +754,44 @@ window.addEventListener('load', checkOrientation);
 // Bloquea scroll del body cuando estés haciendo scroll dentro del bloque7 al llegar al tope o final
 const bloque7 = document.querySelector('.bloque7');
 
-let startY = 0;  // Para controlar touchmove
+let startY = 0;
 
-// Para scroll con mouse (wheel)
+// 🖱️ Manejar scroll con mouse (PC)
 bloque7.addEventListener('wheel', function(e) {
   const delta = e.deltaY;
   const scrollTop = bloque7.scrollTop;
   const scrollHeight = bloque7.scrollHeight;
   const clientHeight = bloque7.clientHeight;
 
-  // Si intento hacer scroll hacia abajo pero ya estoy al final
-  // o hacia arriba y ya estoy al principio, bloqueo propagación para evitar scroll body
-  if (
-    (delta > 0 && scrollTop + clientHeight >= scrollHeight) || 
-    (delta < 0 && scrollTop <= 0)
-  ) {
-    e.preventDefault();
+  const isScrollingDownAtBottom = delta > 0 && scrollTop + clientHeight >= scrollHeight;
+  const isScrollingUpAtTop = delta < 0 && scrollTop <= 0;
+
+  if (isScrollingDownAtBottom || isScrollingUpAtTop) {
+    e.preventDefault(); // Bloquea que el scroll se propague fuera de bloque7
   }
 }, { passive: false });
 
-// Para scroll táctil (touchmove)
+// 📱 Manejar scroll táctil (móvil)
 bloque7.addEventListener('touchstart', function(e) {
   startY = e.touches[0].clientY;
 }, { passive: true });
 
 bloque7.addEventListener('touchmove', function(e) {
   const currentY = e.touches[0].clientY;
-  const diffY = startY - currentY;  // Positivo si muevo dedo hacia arriba (scroll down)
+  const diffY = startY - currentY;
 
   const scrollTop = bloque7.scrollTop;
   const scrollHeight = bloque7.scrollHeight;
   const clientHeight = bloque7.clientHeight;
 
-  // Si intento hacer scroll hacia abajo pero ya estoy al final
-  // o hacia arriba y ya estoy al principio, bloqueo propagación para evitar scroll body
-  if (
-    (diffY > 0 && scrollTop + clientHeight >= scrollHeight) ||
-    (diffY < 0 && scrollTop <= 0)
-  ) {
-    e.preventDefault();
+  const isScrollingDownAtBottom = diffY > 0 && scrollTop + clientHeight >= scrollHeight;
+  const isScrollingUpAtTop = diffY < 0 && scrollTop <= 0;
+
+  if (isScrollingDownAtBottom || isScrollingUpAtTop) {
+    e.preventDefault(); // Solo evita el scroll global, no el interno
   }
 }, { passive: false });
+
 
 
 </script>
