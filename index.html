@@ -639,10 +639,10 @@ target="_blank">
 
     intervaloPresentacion = setInterval(() => {
       indiceActual++;
-      if (indiceActual >= bloques.length - 1) {
-        clearInterval(intervaloPresentacion);
-        return;
-      }
+      if (indiceActual >= bloques.length) {
+  clearInterval(intervaloPresentacion);
+  return;
+}
       mostrarBloque(indiceActual);
     }, 10000);
   }
