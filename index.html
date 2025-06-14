@@ -111,9 +111,10 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   overflow-y: auto;
-  overscroll-behavior: contain; /* Evita que el scroll "salte" al body */
+  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
@@ -378,7 +379,7 @@
 
     <!-- Título principal -->
     <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...9988 </p>
+    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...10 </p>
  
  <!-- Subtítulo -->
  <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
@@ -580,7 +581,7 @@ target="_blank">
     const sonido = document.getElementById('sonidoMagico');
     if (sonido) sonido.play();
   });
-  
+
   const bloques = document.querySelectorAll('.bloque');
   const animaciones = [
     'animate__bounceInLeft',
@@ -591,76 +592,64 @@ target="_blank">
     'animate__fadeInDown',
     'animate__fadeInLeft'
   ];
-  
-  // Detecta si es iOS (iPhone, iPad, iPod)
-  function esIOS() {
-    return /iP(ad|hone|od)/.test(navigator.userAgent);
-  }
-  
-  // Aplica animaciones a párrafos, imágenes y botones dentro del bloque
+
   function aplicarAnimacionAlBloque(bloque, animacion) {
     if (!bloque) return;
-  
+
     const elementos = bloque.querySelectorAll('p, img');
     const botones = bloque.querySelectorAll('.boton-maps-elegante');
-  
+
     elementos.forEach((el, i) => {
       const isImage = el.tagName.toLowerCase() === 'img';
       const anim = isImage ? 'animate__fadeInDown' : animacion;
       const delay = `${i}s`;
-  
+
       el.classList.remove('animate__animated', anim);
       el.style.animationDelay = '0s';
       el.style.setProperty('--animate-duration', '0s');
       void el.offsetWidth;
-  
+
       el.classList.add('animate__animated', anim);
       el.style.animationDelay = delay;
       el.style.setProperty('--animate-duration', '2s');
     });
-  
+
     botones.forEach((boton, j) => {
       const delayBoton = `${elementos.length + j}s`;
       const botonAnimacion = 'animate__fadeIn';
-  
+
       boton.classList.remove('animate__animated', botonAnimacion);
       boton.style.animationDelay = '0s';
       boton.style.setProperty('--animate-duration', '0s');
       void boton.offsetWidth;
-  
+
       boton.classList.add('animate__animated', botonAnimacion);
       boton.style.animationDelay = delayBoton;
       boton.style.setProperty('--animate-duration', '1.5s');
     });
   }
-  
+
   let indiceActual = 0;
   let intervaloPresentacion;
-  
+
   function mostrarBloque(indice) {
     const bloque = bloques[indice];
     if (!bloque) return;
-  
-    // En iOS, evita scrollIntoView en el último bloque para prevenir salto
-    if (indice === bloques.length - 1 && esIOS()) {
-      window.scrollTo({ top: bloque.offsetTop, behavior: 'smooth' });
-    } else {
-      bloque.scrollIntoView({ behavior: 'smooth' });
-    }
-  
+
+    bloque.scrollIntoView({ behavior: 'smooth' });
     aplicarAnimacionAlBloque(bloque, animaciones[indice]);
   }
-  
+
   function iniciarPresentacion() {
     document.getElementById('portada').style.display = 'none';
     document.getElementById('contenido').style.display = 'block';
-  
+
     const musica = document.getElementById('musicaFondo');
     if (musica) musica.play();
-  
+
     indiceActual = 0;
     mostrarBloque(indiceActual);
-  
+
     intervaloPresentacion = setInterval(() => {
       indiceActual++;
       if (indiceActual >= bloques.length) {
@@ -670,8 +659,7 @@ target="_blank">
       mostrarBloque(indiceActual);
     }, 10000);
   }
-  
-  // IntersectionObserver para scroll manual con animaciones
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -679,8 +667,7 @@ target="_blank">
         const index = [...bloques].indexOf(bloque);
         if (index !== -1) {
           aplicarAnimacionAlBloque(bloque, animaciones[index]);
-  
-          // Cuenta regresiva en bloque 6
+
           if (bloque.classList.contains('bloque6')) {
             const contador = document.getElementById('contadorAnimado');
             if (contador && !contador.classList.contains('animate__animated')) {
@@ -692,9 +679,9 @@ target="_blank">
       }
     });
   }, { threshold: 0.5 });
-  
+
   bloques.forEach(bloque => observer.observe(bloque));
-  
+
   // Partículas mágicas
   const particlesContainer = document.getElementById('particles');
   for (let i = 0; i < 50; i++) {
@@ -706,7 +693,7 @@ target="_blank">
     p.style.animationDelay = Math.random() * 10 + 's';
     particlesContainer.appendChild(p);
   }
-  
+
   const sparkleContainer = document.getElementById('particles');
   for (let i = 0; i < 20; i++) {
     const s = document.createElement('div');
@@ -716,38 +703,37 @@ target="_blank">
     s.style.animationDelay = Math.random() * 5 + 's';
     sparkleContainer.appendChild(s);
   }
-  
+
   // Cuenta regresiva
   let intervaloCuentaRegresiva;
   document.addEventListener('DOMContentLoaded', () => {
     const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
-  
+
     function actualizarCuenta() {
       const ahora = new Date().getTime();
       const diferencia = fechaEvento - ahora;
-  
+
       if (diferencia <= 0) {
         document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
         clearInterval(intervaloCuentaRegresiva);
         return;
       }
-  
+
       const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
       const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
       const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-  
+
       document.getElementById("dias").innerText = String(dias).padStart(2, '0');
       document.getElementById("horas").innerText = String(horas).padStart(2, '0');
       document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
       document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
     }
-  
+
     intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
     actualizarCuenta();
   });
-  
-  // Bloqueo en orientación horizontal
+
   function checkOrientation() {
     const warning = document.getElementById('landscape-warning');
     if (window.innerHeight < window.innerWidth) {
@@ -758,11 +744,12 @@ target="_blank">
       document.body.style.overflow = 'auto';
     }
   }
-  
+
   window.addEventListener('resize', checkOrientation);
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
-  </script>
+</script>
+
   
     
 
