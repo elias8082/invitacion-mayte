@@ -17,553 +17,554 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<style>
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    overflow-x: hidden;      /* ✅ Oculta solo scroll horizontal */
-    overflow-y: auto;        /* ✅ Permite scroll vertical manual */
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    color: white;
-    overscroll-behavior: none; /* Agrega esto */
-    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
-  }
-
-  #portada {
-  height: 100vh;
-  background: url('img/SAPO01.jpeg') no-repeat center center/cover;
-  background-attachment: scroll; /* evita problemas en iOS */
-  overflow: hidden;
-  overscroll-behavior: none;
-  touch-action: none; /* bloquea scroll táctil en móviles */
-}
-    
-  }
-  #portada button {
-    /*margin-top: 20px;*/
-    font-size: 28px;
-    /*padding: 1rem 2rem;*/
-    cursor: pointer;
-    border: none;
-    border-radius: 40px;
-    background: #9f7d18;
-    color: #ffffff;
-  }
+  <style>
+    /* Estilos base para html y body */
+    html, body {
+      margin: 0; 
+      padding: 0; 
+      height: 100%;
+      overflow-x: hidden;      /* Oculta el scroll horizontal */
+      overflow-y: auto;        /* Permite scroll vertical manual */
+      font-family: Arial, sans-serif;
+      background: #ffffff;     /* Fondo blanco */
+      color: white;            /* Texto blanco */
+    }
   
-  #contenido {
-  display: none;               /* oculto al principio */
-  height: 100vh;
-  overflow-y: scroll;         /* scroll vertical */
-  scroll-snap-type: y mandatory; /* scroll snap para bloques */
-  scroll-behavior: smooth;    /* scroll suave */
-  position: relative;
-}
-
-.bloque {
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: start;   /* cada bloque encaja al inicio */
-  box-sizing: border-box;
-  /*padding: 20px;*/
-}
-
-  .bloque.active {
-    top: 0;
-    position: relative;
-  }
-
-  .bloque1 {  background-image: url('img/fondo_portada.png');
-  background-size: cover;       /* Para que la imagen cubra todo el div */
-  background-position: center;  /* Centra la imagen dentro del div */
-  background-repeat: no-repeat; /* No repite la imagen */ }
-  .bloque2 {  background-image: url('img/fondo_bloque02.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    min-height: 100vh; /* altura mínima: 100% del alto de la ventana */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem; }
-  .bloque3 {  background-image: url('img/fondo_bloque03.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ }
-  .bloque4 { background-image: url('img/fondo_bloque04.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ 
-    width: 100%;
-    min-height: 100vh; /* altura mínima: 100% del alto de la ventana */   
-    
-    align-items: center;
-    padding: 2rem;}
-  .bloque5 { background-image: url('img/fondo_bloque05.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ }
-  .bloque6 { background-image: url('img/fondo_bloque06.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ }
-  .bloque7 { background-image: url('img/fondo_fin.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ }
-
+    /* Estilo para la sección portada */
+    #portada {
+      height: 100vh; /* ocupa toda la altura de la ventana */
+      background: url('img/SAPO01.jpeg') no-repeat center center/cover; /* imagen de fondo centrada y cubierta */
+      background-attachment: scroll; /* evita problemas en iOS con fondo fijo */
+      overflow: hidden; /* oculta overflow */
+      overscroll-behavior: none; /* evita rebotes en scroll */
+      touch-action: none; /* bloquea scroll táctil en móviles */
+    }
+  
+    /* Estilo para botones dentro de #portada */
+    #portada button {
+      /*margin-top: 20px;*/ /* Comentado */
+      font-size: 28px;
+      /*padding: 1rem 2rem;*/ /* Comentado */
+      cursor: pointer;
+      border: none;
+      border-radius: 40px;
+      background: #9f7d18; /* color dorado */
+      color: #ffffff; /* texto blanco */
+    }
+  
+    /* Contenedor de contenido principal, oculto inicialmente */
+    #contenido {
+      display: none;               /* oculto al principio */
+      height: 100vh;              /* altura completa ventana */
+      overflow-y: scroll;         /* scroll vertical */
+      scroll-snap-type: y mandatory; /* scroll snap para bloques verticales */
+      scroll-behavior: smooth;    /* scroll suave al desplazarse */
+      position: relative;
+    }
+  
+    /* Cada bloque ocupa toda la pantalla y está preparado para scroll snap */
+    .bloque {
+      height: 100vh; /* altura de la ventana */
+      width: 100vw;  /* ancho completo de ventana */
+      scroll-snap-align: start;   /* cada bloque encaja al inicio al hacer scroll */
+      box-sizing: border-box;     /* incluye padding y borde en el tamaño */
+      /*padding: 20px;*/          /* Comentado */
+      position: relative; /* para posicionar ::before relativo al bloque */
+      color: #fff;        /* texto blanco */
+      display: flex;
+      justify-content: center;    /* centra horizontalmente */
+      align-items: center;        /* centra verticalmente */
+    }
+  
+    /* Pseudo-elemento para mostrar fondo fijo en cada bloque */
+    .bloque::before {
+      content: "";
+      position: fixed;           /* fijado en pantalla */
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: cover;    /* fondo cubre todo */
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;               /* detrás del contenido */
+      pointer-events: none;      /* no interfiere con clicks */
+      opacity: 0;                /* inicialmente invisible */
+      transition: opacity 0.7s ease; /* transición suave al aparecer */
+    }
+  
+    /* Imágenes de fondo específicas para cada bloque */
+    .bloque1::before { background-image: url('img/fondo_portada.png'); }
+    .bloque2::before { background-image: url('img/fondo_bloque02.png'); }
+    .bloque3::before { background-image: url('img/fondo_bloque03.png'); }
+    .bloque4::before { background-image: url('img/fondo_bloque04.png'); }
+    .bloque5::before { background-image: url('img/fondo_bloque05.png'); }
+    .bloque6::before { background-image: url('img/fondo_bloque06.png'); }
+    .bloque7::before { background-image: url('img/fondo_fin.png'); }
+  
+    /* Solo el bloque activo muestra su fondo */
+    .bloque.active::before {
+      opacity: 1;
+    }
+  
+    /* Estilo para el bloque activo */
+    .bloque.active {
+      top: 0;
+      position: relative;
+    }
+  
+    /* Botón estilo elegante para mapa o enlace */
     .boton-maps-elegante {
-    display: inline-block;
-    background: linear-gradient(135deg, #134915, #0f9d58);
-    color: #fff;
-    padding: 14px 26px;
-    font-size: 18px;
-    border: none;
-    border-radius: 40px;
-    font-family: 'Charm', sans-serif;
-    text-decoration: none;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-  .boton-maps-elegante i {
-    margin-right: 10px;
-}
-  .boton-maps-elegante:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.3);
-    background: linear-gradient(135deg, #134915, #0f9d58);
-}
-
-
-.cuenta-regresiva {
-    text-align: center;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    /*margin-top: 3rem;*/
-    margin-left: 16px;
-    margin-right: 16px;
-}
-
-  .cuenta-regresiva h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #9f7d18;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-  .tiempo {
-    display: grid;
-    grid-template-columns: repeat(2, auto); /* 2 columnas */
-    justify-content: center;
-    gap: 20px;
-}
-
-  .tiempo div {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 5px;
-    border-radius: 12px;
-    min-width: 80px;
-    box-shadow: 0 0 10px #88b554;
-    transition: transform 0.3s ease;
-}
-
-  .tiempo div:hover {
-    transform: scale(1.1);
-}
-
-  .tiempo span {
-    font-size: 32px;
-    display: block;
-    color: #9f7d18;
-}
-
-  .tiempo small {
-    font-size: 14px;
-    color: #ccc;
-}
-
- /* Partículas */
+      display: inline-block;
+      background: linear-gradient(135deg, #134915, #0f9d58); /* degradado verde */
+      color: #fff;
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 40px;
+      font-family: 'Charm', sans-serif;
+      text-decoration: none;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .boton-maps-elegante i {
+      margin-right: 10px; /* espacio entre ícono y texto */
+    }
+    .boton-maps-elegante:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #134915, #0f9d58);
+    }
+  
+    /* Estilos para el contador regresivo */
+    .cuenta-regresiva {
+      text-align: center;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      /*margin-top: 3rem;*/ /* Comentado */
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  
+    .cuenta-regresiva h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #9f7d18; /* color dorado */
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  
+    /* Grid para los tiempos */
+    .tiempo {
+      display: grid;
+      grid-template-columns: repeat(2, auto); /* 2 columnas */
+      justify-content: center;
+      gap: 20px;
+    }
+  
+    /* Estilo para cada bloque de tiempo */
+    .tiempo div {
+      background-color: rgba(255, 255, 255, 0.1); /* fondo semi-transparente */
+      padding: 5px;
+      border-radius: 12px;
+      min-width: 80px;
+      box-shadow: 0 0 10px #88b554;
+      transition: transform 0.3s ease;
+    }
+  
+    /* Efecto hover agranda el bloque */
+    .tiempo div:hover {
+      transform: scale(1.1);
+    }
+  
+    /* Estilo para números grandes del tiempo */
+    .tiempo span {
+      font-size: 32px;
+      display: block;
+      color: #9f7d18;
+    }
+  
+    /* Estilo para texto pequeño (días, horas...) */
+    .tiempo small {
+      font-size: 14px;
+      color: #ccc;
+    }
+  
+    /* Contenedor para partículas animadas */
     .particles {
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      z-index: 999;
-      pointer-events: none;
+      z-index: 999;         /* encima de todo */
+      pointer-events: none; /* no interfiere con clicks */
       overflow: hidden;
     }
-
+  
+    /* Partícula individual */
     .particle {
       position: absolute;
       width: 8px; height: 8px;
-      background: #d4af3766;
+      background: #d4af3766; /* color dorado translúcido */
       border-radius: 50%;
-      animation: float 10s linear infinite;
+      animation: float 10s linear infinite; /* animación de flotado */
     }
-
+  
+    /* Animación para partículas que flotan verticalmente */
     @keyframes float {
       0% { transform: translateY(100vh); opacity: 0; }
       50% { opacity: 1; }
       100% { transform: translateY(-10vh); opacity: 0; }
     }
-
+  
+    /* Partícula tipo chispa con brillo */
     .sparkle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 8px 2px white;
-  animation: sparkle 1s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0); }
-  50% { opacity: 1; transform: scale(1); }
-}
- 
-#boton {
-    position: absolute;
-    top: 50%;
-    left: 8px;
-    transform: translateY(-50%);
-  }
-
-  /* Animación que hace fadeIn, stay visible, fadeOut y stay oculto */
-  @keyframes fadeInOut {
-    0%, 20% { opacity: 0; }
-    30%, 70% { opacity: 1; }
-    80%, 100% { opacity: 0; }
-  }
-
-  /* Clase para la animación de fadeInOut en loop */
-  .fadeInOutLoop {
-    animation: fadeInOut 6s infinite;
-  }
-
-  /* Retraso para el segundo texto */
-  .fadeInOutLoop.delay {
-    opacity: 0;
-    animation-delay: 1s;
-    animation-fill-mode: forwards;
-  }
-
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 2px white;
+      animation: sparkle 1s ease-in-out infinite;
+    }
   
-  @keyframes coronaBrillo {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px gold);
-  }
-  50% {
-    filter: drop-shadow(0 0 12px #ffe066);
-  }
-}
-
-@keyframes flotarCorona {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-.corona-svg {
-  animation: coronaBrillo 2s infinite, flotarCorona 3s ease-in-out infinite;
-  transition: filter 0.3s ease-in-out;
-}@keyframes coronaBrillo {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px gold);
-  }
-  50% {
-    filter: drop-shadow(0 0 12px #ffe066);
-  }
-}
-
-@keyframes flotarCorona {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-.corona-svg {
-  animation: coronaBrillo 2s infinite, flotarCorona 3s ease-in-out infinite;
-  transition: filter 0.3s ease-in-out;
-}
-
-@keyframes flotarLento {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
-}
-
-.flotar-magico {
-  animation: flotarLento 4s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Asegura que imágenes y elementos no se desborden */
-  img, video, iframe {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Previene que botones o elementos flotantes salgan del área visible */
- 
-
-  /* Si usas partículas con ancho completo */
-  .particles {
-    width: 100% !important;
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  /* Cualquier contenedor general */
-  .bloque, #portada, #contenido {
-    overflow-x: hidden;
-  }
-}
+    /* Animación de chispa que aparece y desaparece */
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
   
-</style>
+    /* Botón con posición absoluta para posicionarlo */
+    #boton {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+    }
+  
+    /* Animación fadeIn, stay visible, fadeOut y stay oculto */
+    @keyframes fadeInOut {
+      0%, 20% { opacity: 0; }
+      30%, 70% { opacity: 1; }
+      80%, 100% { opacity: 0; }
+    }
+  
+    /* Clase para aplicar animación de fadeInOut en loop infinito */
+    .fadeInOutLoop {
+      animation: fadeInOut 6s infinite;
+    }
+  
+    /* Retraso para segundo texto animado */
+    .fadeInOutLoop.delay {
+      opacity: 0;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
+  
+    /* Animaciones para corona brillante y flotante */
+    @keyframes coronaBrillo {
+      0%, 100% {
+        filter: drop-shadow(0 0 4px gold);
+      }
+      50% {
+        filter: drop-shadow(0 0 12px #ffe066);
+      }
+    }
+  
+    @keyframes flotarCorona {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+  
+    /* Clase para animar svg de corona */
+    .corona-svg {
+      animation: coronaBrillo 2s infinite, flotarCorona 3s ease-in-out infinite;
+      transition: filter 0.3s ease-in-out;
+    }
+  
+    /* Animación flotado lento para elementos mágicos */
+    @keyframes flotarLento {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+  
+    /* Clase para aplicar flotado lento */
+    .flotar-magico {
+      animation: flotarLento 4s ease-in-out infinite;
+    }
+  
+    /* Media query para pantallas pequeñas */
+    @media (max-width: 768px) {
+      html, body {
+        overflow-x: hidden !important; /* asegurar que no haya scroll horizontal */
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+  
+      /* Que imágenes, videos y iframes sean responsivos */
+      img, video, iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+  
+      /* Partículas adaptadas a ancho completo en móvil */
+      .particles {
+        width: 100% !important;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+  
+      /* Evitar overflow horizontal en bloques principales */
+      .bloque, #portada, #contenido {
+        overflow-x: hidden;
+      }
+    }
+  </style>
+  
 </head>
 <body>
-  <div id="landscape-warning" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000d9; color: white; font-size: 24px; text-align: center; padding: 50px;">
-    🔄 Por favor gira tu teléfono <strong>verticalmente</strong> para ver esta invitación.
-  </div>
-  
+  <!-- Advertencia para orientar el teléfono en vertical -->
+<div id="landscape-warning" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000d9; color: white; font-size: 24px; text-align: center; padding: 50px;">
+  🔄 Por favor gira tu teléfono <strong>verticalmente</strong> para ver esta invitación.
+</div>
 
-  <audio id="sonidoMagico" preload="auto">
-    <source src="img/chime.mp3" type="audio/mpeg">
-  </audio>
- 
-  <!-- Música de fondo -->
-  <audio id="musicaFondo" autoplay loop>
-    <source src="img/princes_sapo.mp3" type="audio/mpeg">
-  </audio>
+<!-- Sonido mágico para efectos especiales -->
+<audio id="sonidoMagico" preload="auto">
+<source src="img/chime.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- Partículas mágicas -->
-  <div class="particles" id="particles"></div>
+<!-- Música de fondo que se reproduce automáticamente y en loop -->
+<audio id="musicaFondo" autoplay loop>
+<source src="img/princes_sapo.mp3" type="audio/mpeg">
+</audio>
 
-  <div id="portada">
+<!-- Contenedor para las partículas mágicas animadas en la invitación -->
+<div class="particles" id="particles"></div>
 
-    <!-- Título principal -->
-    <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez... </p>
- 
- <!-- Subtítulo -->
- <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
-    style=" font-family: 'Rochester', cursive; font-size: 45px; color:  #b19335; text-align: center;">  Una princesa lista para brillar ✨ </p>
- 
-  
-    <button id="boton" onclick="iniciarPresentacion()" class="animate__animated animate__fadeIn animate__delay-3s"
-  style="
-    font-size: 28px;
-    font-family: 'Rochester', cursive;
-    background: linear-gradient(135deg, #f5d06f, #d4af37);
-    border: none;
-    color: white;
-    padding: 8px 8px;
-    border-radius: 40px;
-    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-    transition: transform 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+<!-- Sección principal de la portada con título, subtítulo y botón -->
+<div id="portada">
 
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-  ">
+<!-- Título principal con animación y estilo -->
+<p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
+   style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;">
+  Érase una vez...
+</p>
+
+<!-- Subtítulo animado debajo del título principal -->
+<p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
+   style="font-family: 'Rochester', cursive; font-size: 45px; color: #b19335; text-align: center;">
+  Una princesa lista para brillar ✨
+</p>
+
+<!-- Botón para iniciar la presentación, con animaciones y estilo personalizado -->
+<button id="boton" onclick="iniciarPresentacion()" class="animate__animated animate__fadeIn animate__delay-3s"
+        style="
+          font-size: 28px;
+          font-family: 'Rochester', cursive;
+          background: linear-gradient(135deg, #f5d06f, #d4af37);
+          border: none;
+          color: white;
+          padding: 8px 8px;
+          border-radius: 40px;
+          box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+          transition: transform 0.3s;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 2;">
+  <!-- Icono SVG decorativo en el botón -->
   <svg width="24" height="24" viewBox="0 0 24 24" fill="white" class="corona-svg">
     <path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
     <path d="M5 18H19V20H5V18Z" fill="#fff"/>
   </svg>
   Entrar al reino
 </button>
-  
-  </div>
+</div>
 
+<!-- Contenido principal dividido en bloques que conforman las distintas secciones de la invitación -->
 <div id="contenido">
 
-  <div class="bloque bloque1 active">
-    <div style="position: relative; top: 5%;">
-      <p class="animate__animated animate__fadeInLeft" style="color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; --animate-duration: 1.5s;">Mis XV Años</p>  
-    <center><img src="img/marco004.png" alt="Imagen responsiva" class="img-fluid animate__animated animate__fadeInDown animate__delay-1s" style="--animate-duration: 2s;"></center>      
-    <p class="animate__animated animate__zoomIn animate__delay-2s" style="color: #9f7d18; font-size: 90px; text-align: center; font-family: 'Rochester', cursive; --animate-duration: 1.5s;">Lia Mayte</p>
+<!-- Bloque 1: Presentación de la quinceañera con imagen y texto grande -->
+<div class="bloque bloque1 active">
+  <div style="position: relative; top: 5%;">
+    <p class="animate__animated animate__fadeInLeft"
+       style="color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; --animate-duration: 1.5s;">
+      Mis XV Años
+    </p>
+    <center>
+      <img src="img/marco004.png" alt="Imagen responsiva" class="img-fluid animate__animated animate__fadeInDown animate__delay-1s" style="--animate-duration: 2s;">
+    </center>
+    <p class="animate__animated animate__zoomIn animate__delay-2s"
+       style="color: #9f7d18; font-size: 90px; text-align: center; font-family: 'Rochester', cursive; --animate-duration: 1.5s;">
+      Lia Mayte
+    </p>
   </div>
-  </div>
+</div>
 
-
-  
-
-  <div class="bloque bloque2">
-    <div style="position: relative; top: 0%;">
-    <p class="animate__animated animate__fadeInUp" style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-
+<!-- Bloque 2: Mensaje emotivo de la quinceañera -->
+<div class="bloque bloque2">
+  <div style="position: relative; top: 0%;">
+    <p class="animate__animated animate__fadeInUp"
+       style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
       Con la guía de Dios
-y el amor incondicional de mis padres,
-hoy me llena de alegría poder compartir
-un instante tan significativo en mi vida.
-Ha llegado el momento de cerrar una etapa,
-dejar atrás mi niñez
-y dar los primeros pasos hacia un camino nuevo,
-lleno de esperanzas, ilusiones
-y sueños.
+      y el amor incondicional de mis padres,
+      hoy me llena de alegría poder compartir
+      un instante tan significativo en mi vida.
+      Ha llegado el momento de cerrar una etapa,
+      dejar atrás mi niñez
+      y dar los primeros pasos hacia un camino nuevo,
+      lleno de esperanzas, ilusiones
+      y sueños.
+    </p>
+  </div>
+</div>
 
-      </p>
-    </div>
-    </div>
+<!-- Bloque 3: Presentación de los padres y padrinos con animaciones escalonadas -->
+<div class="bloque bloque3">
+  <div style="position: relative; top: 2%;">
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 0s; color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      En compañía de
+    </p>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 1s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      Mis Padres
+    </p>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 2s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      Ivon Chávez García
+    </p>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 3s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      José Carlos Infante Arenas
+    </p>
+    <center>
+      <img src="img/pleca_invite01.png" alt="Imagen responsiva" class="img-fluid animate__animated animate__fadeInDown"
+           style="animation-delay: 4s; width: 280px; --animate-duration: 2s;">
+    </center>
+    <br>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 5s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      Mis Padrinos
+    </p>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 6s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      Lina Miriam Chávez García
+    </p>
+    <p class="animate__animated animate__fadeInRight"
+       style="animation-delay: 7s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
+      Cristian Toledano Huipio
+    </p>
+  </div>
+</div>
 
+<!-- Bloque 4: Invitación formal con fecha -->
+<div class="bloque bloque4">
+  <div style="position: relative; top: 1%;">
+    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">¡Te invito!</p>
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">
+      A que me acompañes a celebrar
+      una noche encantada donde los sueños se hacen realidad...
+    </p>
+    <p style="color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive;">Sábado</p>
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">2 de agosto de 2025</p>
+  </div>
+</div>
 
-   
+<!-- Bloque 5: Información de la ceremonia y recepción con enlaces a mapas -->
+<div class="bloque bloque5">
+  <div style="position: relative; top: 3%;">
+    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">Ceremonia</p>
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">
+      Parroquia de la Resurrección del Señor<br>
+      Hora: 18:00 hrs
+    </p>
+    <center>
+      <a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank" class="boton-maps-elegante">
+        <i class="fas fa-map-marker-alt"></i> Ver ubicación
+      </a>
+    </center>
+    <p style="padding-top: 24px;"></p>
+    <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">Recepción</p>
+    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; text-decoration:none;">
+      Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.
+    </p>
+    <center>
+      <a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank" class="boton-maps-elegante">
+        <i class="fas fa-map-marker-alt"></i> Ver ubicación
+      </a>
+    </center>
+  </div>
+</div>
 
+<!-- Bloque 6: Cuenta regresiva y confirmación de asistencia vía WhatsApp -->
+<div class="bloque bloque6">
+  <div style="position: relative; top: 2%;">
+    <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">Sólo faltan</p>
 
-    <div class="bloque bloque3">
-      <div style="position: relative; top: 2%;">
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 0s; color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           En compañía de
-        </p>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 1s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           Mis Padres
-        </p>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 2s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           Ivon Chávez García
-        </p>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 3s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           José Carlos Infante Arenas
-        </p>
-    
-        <center>
-          <img src="img/pleca_invite01.png"
-               alt="Imagen responsiva"
-               class="img-fluid animate__animated animate__fadeInDown"
-               style="animation-delay: 4s; width: 280px; --animate-duration: 2s;">
-        </center>
-    
-        <br>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 5s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           Mis Padrinos
-        </p>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 6s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           Lina Miriam Chávez García
-        </p>
-    
-        <p class="animate__animated animate__fadeInRight"
-           style="animation-delay: 7s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; --animate-duration: 2s;">
-           Cristian Toledano Huipio
-        </p>
+    <!-- Contenedor de la cuenta regresiva con días, horas, minutos y segundos -->
+    <div class="cuenta-regresiva">
+      <div class="tiempo" id="contadorAnimado">
+        <div><span id="dias">00</span><small>Días</small></div>
+        <div><span id="horas">00</span><small>Horas</small></div>
+        <div><span id="minutos">00</span><small>Minutos</small></div>
+        <div><span id="segundos">00</span><small>Segundos</small></div>
       </div>
     </div>
-    
 
+    <p style="padding-top: 12px;"></p>
 
-  <div class="bloque bloque4">
-    <div style="position: relative; top: 1%;">
-    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">¡Te invito! </p>         
-    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">A que me acompañes a celebrar
-      una noche encantada donde los sueños se hacen realidad...</p> 
-      <p style="color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive;">Sábado</p>
-      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">2 de agosto de 2025</p>  
-      
-    </div>
-    </div>
+    <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">
+      Confirmar asistencia <br>
+      <span style="color: #134915; font-size: 22px; text-align: center; font-family: 'Poppins';">vía WhatsApp</span>
+    </p>
 
+    <p style="color: #9f7d18; font-size: 38px; text-align: center; font-family: 'Great Vibes', cursive;">
+      La pista de baile ya está lista... ¡Sólo faltas tú!
+    </p>
 
-
-  <div class="bloque bloque5">
-    <div style="position: relative; top: 3%;">
-    <p style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">Ceremonia</p>         
-    <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">Parroquia de la Resurrección del Señor<br>
-      Hora: 18:00 hrs </p>
-     <center><a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank" class="boton-maps-elegante">
-      <i class="fas fa-map-marker-alt"></i> Ver ubicación
-      </a></center>
-      <p style="padding-top: 24px;"></p>
-      <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">Recepcion </p>         
-      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; text-decoration:none;">Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.</p>
-        <center><a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank" class="boton-maps-elegante">
-          <i class="fas fa-map-marker-alt"></i> Ver ubicación
-        </a></center>      
-    </div>
+    <!-- Botón para confirmar asistencia vía WhatsApp -->
+    <center>
+      <a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" target="_blank">
+        <img src="img/WhatsApp.svg.webp" class="animate__animated animate__pulse" alt="Confirmar por WhatsApp" style="width:80px; height:auto; --animate-duration: 2s;">
+      </a>
+    </center>
+    <p style="padding-top: 24px;"></p>
   </div>
-
-
-
-
-  <div class="bloque bloque6"> 
-    <div style="position: relative; top: 2%;">    
-    <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Sólo faltan </p>         
-              
-    <!-- Contenedor de la cuenta regresiva -->
-<div class="cuenta-regresiva">
-  <div class="tiempo" id="contadorAnimado">
-    <div><span id="dias">00</span><small>Días</small></div>
-    <div><span id="horas">00</span><small>Horas</small></div>
-    <div><span id="minutos">00</span><small>Minutos</small></div>
-    <div><span id="segundos">00</span><small>Segundos</small></div>
-  </div>
-</div>              
-
-<p style="padding-top: 12px;"></p>
-
-<p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Confirmar asistencia <br> <span style="color: #134915; font-size: 22px; text-align: center; font-family: 'Poppins';">vía WhatsApp</span></p> 
-
-<p style="color: #9f7d18; font-size: 38px; text-align: center; font-family: 'Great Vibes', cursive;">La pista de baile ya está lista...
-  ¡Sólo faltas tú! </p>            
-
-  <!-- Botón -->
-<!-- Botón de WhatsApp -->
-<center><a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" 
-target="_blank">
-<img src="img/WhatsApp.svg.webp" class="animate__animated animate__pulse" alt="Confirmar por WhatsApp" style="width:80px; height:auto; --animate-duration: 2s;">
-</a></center>
-<p style="padding-top: 24px;"></p>
-</div>
 </div>
 
-
-
-
+<!-- Bloque 7: Mensaje de despedida y bienvenida -->
 <div class="bloque bloque7">
-  <div style="position: relative; top: 6%;"> 
-  <p style="color: #9f7d18; font-size: 65px; text-align: center; font-family: 'Charm';">
-    ¡Te esperamos!
-  </p>
+  <div style="position: relative; top: 6%;">
+    <p style="color: #9f7d18; font-size: 65px; text-align: center; font-family: 'Charm';">
+      ¡Te esperamos!
+    </p>
+  </div>
 </div>
+
 </div>
+
 
 
 <script>
+  // Reproducir sonido mágico al hacer clic en el botón con id 'boton'
+  document.getElementById('boton').addEventListener('click', () => {
+    const sonido = document.getElementById('sonidoMagico');
+    if (sonido) sonido.play();
+  });
 
-document.getElementById('boton').addEventListener('click', () => {
-  const sonido = document.getElementById('sonidoMagico');
-  if (sonido) sonido.play();
-});
-
-
+  // Selecciona todos los bloques que contienen contenido a animar
   const bloques = document.querySelectorAll('.bloque');
+
+  // Lista de animaciones para aplicar a cada bloque (usar animate.css)
   const animaciones = [
     'animate__bounceInLeft',
     'animate__fadeInUp',
@@ -573,69 +574,76 @@ document.getElementById('boton').addEventListener('click', () => {
     'animate__fadeInDown',
     'animate__fadeInLeft'
   ];
-  
-  // Aplica animaciones con delay a los p e img dentro de cada bloque
+
+  // Función para aplicar animación con delay a los <p>, <img> y botones dentro de un bloque
   function aplicarAnimacionAlBloque(bloque, animacion) {
     if (!bloque) return;
-  
+
+    // Selecciona párrafos e imágenes dentro del bloque
     const elementos = bloque.querySelectorAll('p, img');
-    const botones = bloque.querySelectorAll('.boton-maps-elegante'); // ✅ Esta línea es crucial    
+    // Selecciona botones con clase específica dentro del bloque
+    const botones = bloque.querySelectorAll('.boton-maps-elegante');
 
     elementos.forEach((el, i) => {
       const isImage = el.tagName.toLowerCase() === 'img';
+      // Las imágenes siempre reciben la animación 'fadeInDown'
       const anim = isImage ? 'animate__fadeInDown' : animacion;
-      const delay = `${i}s`;
-  
-      // Quitar animaciones previas
+      const delay = `${i}s`; // Delay progresivo para cada elemento
+
+      // Reiniciar animación quitando clases y estilos previos
       el.classList.remove('animate__animated', anim);
       el.style.animationDelay = '0s';
       el.style.setProperty('--animate-duration', '0s');
-      void el.offsetWidth; // reflow para reiniciar animación
-  
-      // Aplicar animación con delay y duración
+      void el.offsetWidth; // Reflow para reiniciar animación
+
+      // Aplicar animación con delay y duración personalizada
       el.classList.add('animate__animated', anim);
       el.style.animationDelay = delay;
       el.style.setProperty('--animate-duration', '2s');
     });
 
-    // Animar los botones con animate__fadeIn después del último texto
-  botones.forEach((boton, j) => {
-    const delayBoton = `${elementos.length + j}s`;
-    const botonAnimacion = 'animate__fadeIn';
+    // Animar los botones con fadeIn después del último texto con delay progresivo
+    botones.forEach((boton, j) => {
+      const delayBoton = `${elementos.length + j}s`;
+      const botonAnimacion = 'animate__fadeIn';
 
-    // Reiniciar animación
-    boton.classList.remove('animate__animated', botonAnimacion);
-    boton.style.animationDelay = '0s';
-    boton.style.setProperty('--animate-duration', '0s');
-    void boton.offsetWidth;
+      // Reiniciar animación
+      boton.classList.remove('animate__animated', botonAnimacion);
+      boton.style.animationDelay = '0s';
+      boton.style.setProperty('--animate-duration', '0s');
+      void boton.offsetWidth;
 
-    // Aplicar animación solo una vez
-    boton.classList.add('animate__animated', botonAnimacion);
-    boton.style.animationDelay = delayBoton;
-    boton.style.setProperty('--animate-duration', '1.5s');
-  });
+      // Aplicar animación
+      boton.classList.add('animate__animated', botonAnimacion);
+      boton.style.animationDelay = delayBoton;
+      boton.style.setProperty('--animate-duration', '1.5s');
+    });
   }
-  
-  // Scroll automático con animación
+
+  // Variables para controlar la presentación automática por bloques
   let indiceActual = 0;
   let intervaloPresentacion;
-  
+
+  // Función para mostrar un bloque específico y aplicarle animación
   function mostrarBloque(indice) {
     if (bloques[indice]) {
       bloques[indice].scrollIntoView({ behavior: 'smooth' });
       aplicarAnimacionAlBloque(bloques[indice], animaciones[indice]);
     }
   }
-  
+
+  // Inicia la presentación desde la portada, oculta portada y muestra contenido con música y animaciones
   function iniciarPresentacion() {
     document.getElementById('portada').style.display = 'none';
     document.getElementById('contenido').style.display = 'block';
+
     const musica = document.getElementById('musicaFondo');
     if (musica) musica.play();
-  
+
     indiceActual = 0;
     mostrarBloque(indiceActual);
-  
+
+    // Cambia automáticamente de bloque cada 10 segundos
     intervaloPresentacion = setInterval(() => {
       indiceActual++;
       if (indiceActual >= bloques.length) {
@@ -643,10 +651,10 @@ document.getElementById('boton').addEventListener('click', () => {
         return;
       }
       mostrarBloque(indiceActual);
-    }, 10000); // Duración por bloque antes de cambiar
+    }, 10000);
   }
-  
-  // IntersectionObserver para animar al hacer scroll manual
+
+  // IntersectionObserver para animar bloques cuando se hacen visibles con scroll manual
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -655,7 +663,7 @@ document.getElementById('boton').addEventListener('click', () => {
         if (index !== -1) {
           aplicarAnimacionAlBloque(bloque, animaciones[index]);
 
-          // Si es el bloque de la cuenta regresiva (.bloque6), animar el contador también
+          // Si es el bloque6 (cuenta regresiva), animar también el contador
           if (bloque.classList.contains('bloque6')) {
             const contador = document.getElementById('contadorAnimado');
             if (contador && !contador.classList.contains('animate__animated')) {
@@ -669,18 +677,11 @@ document.getElementById('boton').addEventListener('click', () => {
   }, {
     threshold: 0.5
   });
-  
+
+  // Observa cada bloque para detectar cuando entra en viewport
   bloques.forEach(bloque => observer.observe(bloque));
 
-  // Animar botones de ubicación
-//const botonesMaps = document.querySelectorAll('.boton-maps-elegante');
-//botonesMaps.forEach(boton => {
- // boton.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
-//});
-
- 
-  
-  // Código de partículas mágicas
+  // Código para crear partículas mágicas animadas en el fondo
   const particlesContainer = document.getElementById('particles');
   for (let i = 0; i < 50; i++) {
     const p = document.createElement('div');
@@ -691,7 +692,8 @@ document.getElementById('boton').addEventListener('click', () => {
     p.style.animationDelay = Math.random() * 10 + 's';
     particlesContainer.appendChild(p);
   }
-  
+
+  // Código para crear chispas (sparkles) animadas en el fondo
   const sparkleContainer = document.getElementById('particles');
   for (let i = 0; i < 20; i++) {
     const s = document.createElement('div');
@@ -701,63 +703,61 @@ document.getElementById('boton').addEventListener('click', () => {
     s.style.animationDelay = Math.random() * 5 + 's';
     sparkleContainer.appendChild(s);
   }
-  
-  // Cuenta regresiva
+
+  // Variables y función para la cuenta regresiva hacia la fecha del evento
   let intervaloCuentaRegresiva;
-  
+
   document.addEventListener('DOMContentLoaded', () => {
     const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
-  
+
     function actualizarCuenta() {
       const ahora = new Date().getTime();
       const diferencia = fechaEvento - ahora;
-  
+
       if (diferencia <= 0) {
         document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
         clearInterval(intervaloCuentaRegresiva);
         return;
       }
-  
+
+      // Calcular días, horas, minutos y segundos restantes
       const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
       const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
       const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-  
+
+      // Actualizar el texto en los elementos correspondientes
       document.getElementById("dias").innerText = String(dias).padStart(2, '0');
       document.getElementById("horas").innerText = String(horas).padStart(2, '0');
       document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
       document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
     }
-  
+
     intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
     actualizarCuenta();
   });
-  
-  // Animación infinita del botón después de la portada
- // setTimeout(() => {
-   // document.getElementById('boton').classList.add('animate__pulse', 'animate__infinite');
-  //}, 2000);
 
+  // Función para mostrar aviso cuando el dispositivo esté en orientación horizontal
   function checkOrientation() {
-  const warning = document.getElementById('landscape-warning');
-  if (window.innerHeight < window.innerWidth) {
-    // Estás en horizontal
-    warning.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Evita scroll
-  } else {
-    // Estás en vertical
-    warning.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const warning = document.getElementById('landscape-warning');
+    if (window.innerHeight < window.innerWidth) {
+      // Modo horizontal
+      warning.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Evita scroll horizontal
+    } else {
+      // Modo vertical
+      warning.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
   }
-}
 
-  // Detecta cambios de orientación
+  // Detecta cambios de orientación o tamaño de ventana para mostrar u ocultar aviso
   window.addEventListener('resize', checkOrientation);
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
 
-
 </script>
+
   
 
 
