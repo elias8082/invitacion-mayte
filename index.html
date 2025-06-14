@@ -315,14 +315,7 @@
   }
 
   /* Previene que botones o elementos flotantes salgan del área visible */
-  #boton {
-    max-width: 90%;
-    left: 5% !important;
-    right: 5% !important;
-    transform: translateY(-50%);
-    font-size: 22px;
-    text-align: center;
-  }
+ 
 
   /* Si usas partículas con ancho completo */
   .particles {
@@ -506,7 +499,7 @@ y sueños.
       </a></center>
       <p style="padding-top: 24px;"></p>
       <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;">Recepcion </p>         
-      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">Calle Itzopan, mz B43, lt 33 <br>Colonia Azteca Tercera.</p>
+      <p style="color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive; text-decoration: none;">Calle Itzopan, mz B43, lt 33 <br>Colonia Azteca Tercera.</p>
         <center><a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank" class="boton-maps-elegante">
           <i class="fas fa-map-marker-alt"></i> Ver ubicación
         </a></center>      
@@ -521,15 +514,14 @@ y sueños.
     <p style="color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Sólo faltan </p>         
               
     <!-- Contenedor de la cuenta regresiva -->
-    <div class="cuenta-regresiva">
-    
-      <div class="tiempo animate__animated animate__zoomIn animate__delay-2s">
-        <div><span id="dias">00</span><small>Días</small></div>
-        <div><span id="horas">00</span><small>Horas</small></div>
-        <div><span id="minutos">00</span><small>Minutos</small></div>
-        <div><span id="segundos">00</span><small>Segundos</small></div>
-      </div>
-    </div>              
+<div class="cuenta-regresiva">
+  <div class="tiempo" id="contadorAnimado">
+    <div><span id="dias">00</span><small>Días</small></div>
+    <div><span id="horas">00</span><small>Horas</small></div>
+    <div><span id="minutos">00</span><small>Minutos</small></div>
+    <div><span id="segundos">00</span><small>Segundos</small></div>
+  </div>
+</div>              
 
 <p style="padding-top: 16px;"></p>
 
@@ -584,8 +576,8 @@ document.getElementById('boton').addEventListener('click', () => {
     if (!bloque) return;
   
     const elementos = bloque.querySelectorAll('p, img');
-    const botones = bloque.querySelectorAll('.boton-maps-elegante'); // ✅ Esta línea es crucial
-  
+    const botones = bloque.querySelectorAll('.boton-maps-elegante'); // ✅ Esta línea es crucial    
+
     elementos.forEach((el, i) => {
       const isImage = el.tagName.toLowerCase() === 'img';
       const anim = isImage ? 'animate__fadeInDown' : animacion;
@@ -659,6 +651,15 @@ document.getElementById('boton').addEventListener('click', () => {
         const index = [...bloques].indexOf(bloque);
         if (index !== -1) {
           aplicarAnimacionAlBloque(bloque, animaciones[index]);
+
+          // Si es el bloque de la cuenta regresiva (.bloque6), animar el contador también
+          if (bloque.classList.contains('bloque6')) {
+            const contador = document.getElementById('contadorAnimado');
+            if (contador && !contador.classList.contains('animate__animated')) {
+              contador.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
+              contador.style.setProperty('--animate-duration', '2s');
+            }
+          }
         }
       }
     });
@@ -673,8 +674,8 @@ document.getElementById('boton').addEventListener('click', () => {
 //botonesMaps.forEach(boton => {
  // boton.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
 //});
-  
-  
+
+ 
   
   // Código de partículas mágicas
   const particlesContainer = document.getElementById('particles');
