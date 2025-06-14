@@ -30,13 +30,13 @@
   }
 
   #portada {
-    height: 100vh;
-    background: url('img/SAPO01.jpeg') no-repeat center center/cover;
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;*/
-    color: #9f7d18;
+  height: 100vh;
+  background: url('img/SAPO01.jpeg') no-repeat center center/cover;
+  background-attachment: scroll; /* evita problemas en iOS */
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none; /* bloquea scroll táctil en móviles */
+}
     
   }
   #portada button {
