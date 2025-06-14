@@ -57,11 +57,12 @@
 }
 
 .bloque {
-  height: 100vh;
+  /*height: 100vh;*/
   width: 100vw;
   scroll-snap-align: start;   /* cada bloque encaja al inicio */
   box-sizing: border-box;
   /*padding: 20px;*/
+  min-height: 100vh;
 }
 
   .bloque.active {
@@ -107,7 +108,11 @@
   .bloque7 { background-image: url('img/fondo_fin.png');
     background-size: cover;       /* Para que la imagen cubra todo el div */
     background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ }
+    background-repeat: no-repeat; /* No repite la imagen */ 
+    min-height: 100vh; /* mínimo igual a la pantalla */
+  height: auto;      /* que pueda crecer */
+  overflow-y: auto;  /* que pueda scrollear internamente si es más alto */
+  -webkit-overflow-scrolling: touch; /* para scroll suave en iOS */}
 
     .boton-maps-elegante {
     display: inline-block;
