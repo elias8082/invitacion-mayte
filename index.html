@@ -346,6 +346,12 @@
   }
 }
 
+/* Solo en Safari/iOS: desactiva scroll suave global para evitar brinco */
+@supports (-webkit-touch-callout: none) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
 
   
 </style>
@@ -570,211 +576,194 @@ target="_blank">
 </div>
 
 <script>
-document.getElementById('boton').addEventListener('click', () => {
-  const sonido = document.getElementById('sonidoMagico');
-  if (sonido) sonido.play();
-});
-
-const bloques = document.querySelectorAll('.bloque');
-const animaciones = [
-  'animate__bounceInLeft',
-  'animate__fadeInUp',
-  'animate__fadeInRight',
-  'animate__zoomIn',
-  'animate__flipInX',
-  'animate__fadeInDown',
-  'animate__fadeInLeft'
-];
-
-// Animar p e img dentro de cada bloque
-function aplicarAnimacionAlBloque(bloque, animacion) {
-  if (!bloque) return;
-
-  const elementos = bloque.querySelectorAll('p, img');
-  const botones = bloque.querySelectorAll('.boton-maps-elegante');
-
-  elementos.forEach((el, i) => {
-    const isImage = el.tagName.toLowerCase() === 'img';
-    const anim = isImage ? 'animate__fadeInDown' : animacion;
-    const delay = `${i}s`;
-
-    el.classList.remove('animate__animated', anim);
-    el.style.animationDelay = '0s';
-    el.style.setProperty('--animate-duration', '0s');
-    void el.offsetWidth;
-
-    el.classList.add('animate__animated', anim);
-    el.style.animationDelay = delay;
-    el.style.setProperty('--animate-duration', '2s');
+  document.getElementById('boton').addEventListener('click', () => {
+    const sonido = document.getElementById('sonidoMagico');
+    if (sonido) sonido.play();
   });
-
-  botones.forEach((boton, j) => {
-    const delayBoton = `${elementos.length + j}s`;
-    const botonAnimacion = 'animate__fadeIn';
-
-    boton.classList.remove('animate__animated', botonAnimacion);
-    boton.style.animationDelay = '0s';
-    boton.style.setProperty('--animate-duration', '0s');
-    void boton.offsetWidth;
-
-    boton.classList.add('animate__animated', botonAnimacion);
-    boton.style.animationDelay = delayBoton;
-    boton.style.setProperty('--animate-duration', '1.5s');
-  });
-}
-
-let indiceActual = 0;
-let intervaloPresentacion;
-
-function mostrarBloque(indice) {
-  if (bloques[indice]) {
-    bloques[indice].scrollIntoView({ behavior: 'smooth' });
-    aplicarAnimacionAlBloque(bloques[indice], animaciones[indice]);
+  
+  const bloques = document.querySelectorAll('.bloque');
+  const animaciones = [
+    'animate__bounceInLeft',
+    'animate__fadeInUp',
+    'animate__fadeInRight',
+    'animate__zoomIn',
+    'animate__flipInX',
+    'animate__fadeInDown',
+    'animate__fadeInLeft'
+  ];
+  
+  // Detecta si es iOS (iPhone, iPad, iPod)
+  function esIOS() {
+    return /iP(ad|hone|od)/.test(navigator.userAgent);
   }
-}
-
-
-function iniciarPresentacion() {
-  document.getElementById('portada').style.display = 'none';
-  document.getElementById('contenido').style.display = 'block';
-  const musica = document.getElementById('musicaFondo');
-  if (musica) musica.play();
-
-  indiceActual = 0;
-  mostrarBloque(indiceActual);
-
-  intervaloPresentacion = setInterval(() => {
-    indiceActual++;
-    if (indiceActual >= bloques.length) {
-      clearInterval(intervaloPresentacion);
-       // Esperamos a que scrollIntoView termine (600ms aprox)
-  setTimeout(() => {
-    const bloque7 = document.querySelector('.bloque7');
-    bloque7.scrollTop = 0; // Forzamos al inicio del bloque
-  }, 700);
-
-  return;
-}
+  
+  // Aplica animaciones a párrafos, imágenes y botones dentro del bloque
+  function aplicarAnimacionAlBloque(bloque, animacion) {
+    if (!bloque) return;
+  
+    const elementos = bloque.querySelectorAll('p, img');
+    const botones = bloque.querySelectorAll('.boton-maps-elegante');
+  
+    elementos.forEach((el, i) => {
+      const isImage = el.tagName.toLowerCase() === 'img';
+      const anim = isImage ? 'animate__fadeInDown' : animacion;
+      const delay = `${i}s`;
+  
+      el.classList.remove('animate__animated', anim);
+      el.style.animationDelay = '0s';
+      el.style.setProperty('--animate-duration', '0s');
+      void el.offsetWidth;
+  
+      el.classList.add('animate__animated', anim);
+      el.style.animationDelay = delay;
+      el.style.setProperty('--animate-duration', '2s');
+    });
+  
+    botones.forEach((boton, j) => {
+      const delayBoton = `${elementos.length + j}s`;
+      const botonAnimacion = 'animate__fadeIn';
+  
+      boton.classList.remove('animate__animated', botonAnimacion);
+      boton.style.animationDelay = '0s';
+      boton.style.setProperty('--animate-duration', '0s');
+      void boton.offsetWidth;
+  
+      boton.classList.add('animate__animated', botonAnimacion);
+      boton.style.animationDelay = delayBoton;
+      boton.style.setProperty('--animate-duration', '1.5s');
+    });
+  }
+  
+  let indiceActual = 0;
+  let intervaloPresentacion;
+  
+  function mostrarBloque(indice) {
+    const bloque = bloques[indice];
+    if (!bloque) return;
+  
+    // En iOS, evita scrollIntoView en el último bloque para prevenir salto
+    if (indice === bloques.length - 1 && esIOS()) {
+      window.scrollTo({ top: bloque.offsetTop, behavior: 'smooth' });
+    } else {
+      bloque.scrollIntoView({ behavior: 'smooth' });
+    }
+  
+    aplicarAnimacionAlBloque(bloque, animaciones[indice]);
+  }
+  
+  function iniciarPresentacion() {
+    document.getElementById('portada').style.display = 'none';
+    document.getElementById('contenido').style.display = 'block';
+  
+    const musica = document.getElementById('musicaFondo');
+    if (musica) musica.play();
+  
+    indiceActual = 0;
     mostrarBloque(indiceActual);
-  }, 10000);
-}
-
-// IntersectionObserver para animar al hacer scroll manual
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const bloque = entry.target;
-      const index = [...bloques].indexOf(bloque);
-      if (index !== -1) {
-        aplicarAnimacionAlBloque(bloque, animaciones[index]);
-
-        // Si es el bloque 6 (cuenta regresiva), animar contador
-        if (bloque.classList.contains('bloque6')) {
-          const contador = document.getElementById('contadorAnimado');
-          if (contador && !contador.classList.contains('animate__animated')) {
-            contador.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
-            contador.style.setProperty('--animate-duration', '2s');
+  
+    intervaloPresentacion = setInterval(() => {
+      indiceActual++;
+      if (indiceActual >= bloques.length) {
+        clearInterval(intervaloPresentacion);
+        return;
+      }
+      mostrarBloque(indiceActual);
+    }, 10000);
+  }
+  
+  // IntersectionObserver para scroll manual con animaciones
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bloque = entry.target;
+        const index = [...bloques].indexOf(bloque);
+        if (index !== -1) {
+          aplicarAnimacionAlBloque(bloque, animaciones[index]);
+  
+          // Cuenta regresiva en bloque 6
+          if (bloque.classList.contains('bloque6')) {
+            const contador = document.getElementById('contadorAnimado');
+            if (contador && !contador.classList.contains('animate__animated')) {
+              contador.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
+              contador.style.setProperty('--animate-duration', '2s');
+            }
           }
         }
       }
+    });
+  }, { threshold: 0.5 });
+  
+  bloques.forEach(bloque => observer.observe(bloque));
+  
+  // Partículas mágicas
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 50; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = 6 + Math.random() * 6 + 's';
+    p.style.opacity = Math.random();
+    p.style.animationDelay = Math.random() * 10 + 's';
+    particlesContainer.appendChild(p);
+  }
+  
+  const sparkleContainer = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('div');
+    s.classList.add('sparkle');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDelay = Math.random() * 5 + 's';
+    sparkleContainer.appendChild(s);
+  }
+  
+  // Cuenta regresiva
+  let intervaloCuentaRegresiva;
+  document.addEventListener('DOMContentLoaded', () => {
+    const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
+  
+    function actualizarCuenta() {
+      const ahora = new Date().getTime();
+      const diferencia = fechaEvento - ahora;
+  
+      if (diferencia <= 0) {
+        document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
+        clearInterval(intervaloCuentaRegresiva);
+        return;
+      }
+  
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+  
+      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
+      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
+      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
+      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
     }
+  
+    intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
+    actualizarCuenta();
   });
-}, { threshold: 0.5 });
-
-bloques.forEach(bloque => observer.observe(bloque));
-
-// Código partículas mágicas (sin cambios)
-const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 50; i++) {
-  const p = document.createElement('div');
-  p.classList.add('particle');
-  p.style.left = Math.random() * 100 + 'vw';
-  p.style.animationDuration = 6 + Math.random() * 6 + 's';
-  p.style.opacity = Math.random();
-  p.style.animationDelay = Math.random() * 10 + 's';
-  particlesContainer.appendChild(p);
-}
-
-const sparkleContainer = document.getElementById('particles');
-for (let i = 0; i < 20; i++) {
-  const s = document.createElement('div');
-  s.classList.add('sparkle');
-  s.style.left = Math.random() * 100 + 'vw';
-  s.style.top = Math.random() * 100 + 'vh';
-  s.style.animationDelay = Math.random() * 5 + 's';
-  sparkleContainer.appendChild(s);
-}
-
-// Cuenta regresiva (sin cambios)
-let intervaloCuentaRegresiva;
-
-document.addEventListener('DOMContentLoaded', () => {
-  const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
-
-  function actualizarCuenta() {
-    const ahora = new Date().getTime();
-    const diferencia = fechaEvento - ahora;
-
-    if (diferencia <= 0) {
-      document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
-      clearInterval(intervaloCuentaRegresiva);
-      return;
+  
+  // Bloqueo en orientación horizontal
+  function checkOrientation() {
+    const warning = document.getElementById('landscape-warning');
+    if (window.innerHeight < window.innerWidth) {
+      warning.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    } else {
+      warning.style.display = 'none';
+      document.body.style.overflow = 'auto';
     }
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-    document.getElementById("dias").innerText = String(dias).padStart(2, '0');
-    document.getElementById("horas").innerText = String(horas).padStart(2, '0');
-    document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
-    document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
   }
-
-  intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
-  actualizarCuenta();
-});
-
-
-// Control de orientación (igual que antes)
-function checkOrientation() {
-  const warning = document.getElementById('landscape-warning');
-  if (window.innerHeight < window.innerWidth) {
-    warning.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  } else {
-    warning.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-window.addEventListener('resize', checkOrientation);
-window.addEventListener('orientationchange', checkOrientation);
-window.addEventListener('load', checkOrientation);
-
-
-
-// Bloquea scroll del body cuando estés haciendo scroll dentro del bloque7 al llegar al tope o final
-const bloque7 = document.querySelector('.bloque7');
-bloque7.addEventListener('wheel', function(e) {
-  const delta = e.deltaY;
-  const scrollTop = bloque7.scrollTop;
-  const scrollHeight = bloque7.scrollHeight;
-  const clientHeight = bloque7.clientHeight;
-
-  const atTop = scrollTop <= 0 && delta < 0;
-  const atBottom = scrollTop + clientHeight >= scrollHeight && delta > 0;
-
-  if (atTop || atBottom) {
-    e.preventDefault(); // evita que el scroll se propague fuera del bloque
-  }
-}, { passive: false });
-
-
-
-
-</script>
+  
+  window.addEventListener('resize', checkOrientation);
+  window.addEventListener('orientationchange', checkOrientation);
+  window.addEventListener('load', checkOrientation);
+  </script>
+  
     
 
 
