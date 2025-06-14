@@ -393,7 +393,7 @@ img, video, iframe {
       padding: 1rem;
       box-sizing: border-box;
     }
-
+  }
     
     /* Ajusta tamaños de texto para mejor legibilidad */
     @media (max-width: 768px) {
@@ -524,25 +524,26 @@ img, video, iframe {
   
     <button id="boton" onclick="iniciarPresentacion()" class="animate__animated animate__fadeIn animate__delay-3s"
   style="
-    font-size: 20px;
+    font-size: 28px;
     font-family: 'Rochester', cursive;
     background: linear-gradient(135deg, #f5d06f, #d4af37);
     border: none;
     color: white;
-    padding: 10px 18px;
+    padding: 8px 8px;
     border-radius: 40px;
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
     transition: transform 0.3s;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+    gap: 10px;
+
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
   ">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="white" class="corona-svg">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white" class="corona-svg">
     <path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
     <path d="M5 18H19V20H5V18Z" fill="#fff"/>
   </svg>
@@ -911,8 +912,6 @@ document.getElementById('boton').addEventListener('click', () => {
   window.addEventListener('resize', checkOrientation);
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
-
-
 </script>
 </body>
 </html>
