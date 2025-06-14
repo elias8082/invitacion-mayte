@@ -558,13 +558,11 @@ target="_blank">
 
 
 <script>
-
-document.getElementById('boton').addEventListener('click', () => {
-  const sonido = document.getElementById('sonidoMagico');
-  if (sonido) sonido.play();
-});
-
-
+  document.getElementById('boton').addEventListener('click', () => {
+    const sonido = document.getElementById('sonidoMagico');
+    if (sonido) sonido.play();
+  });
+  
   const bloques = document.querySelectorAll('.bloque');
   const animaciones = [
     'animate__bounceInLeft',
@@ -582,7 +580,7 @@ document.getElementById('boton').addEventListener('click', () => {
   
     const elementos = bloque.querySelectorAll('p, img');
     const botones = bloque.querySelectorAll('.boton-maps-elegante'); // ✅ Esta línea es crucial    
-
+  
     elementos.forEach((el, i) => {
       const isImage = el.tagName.toLowerCase() === 'img';
       const anim = isImage ? 'animate__fadeInDown' : animacion;
@@ -599,28 +597,29 @@ document.getElementById('boton').addEventListener('click', () => {
       el.style.animationDelay = delay;
       el.style.setProperty('--animate-duration', '2s');
     });
-
+  
     // Animar los botones con animate__fadeIn después del último texto
-  botones.forEach((boton, j) => {
-    const delayBoton = `${elementos.length + j}s`;
-    const botonAnimacion = 'animate__fadeIn';
-
-    // Reiniciar animación
-    boton.classList.remove('animate__animated', botonAnimacion);
-    boton.style.animationDelay = '0s';
-    boton.style.setProperty('--animate-duration', '0s');
-    void boton.offsetWidth;
-
-    // Aplicar animación solo una vez
-    boton.classList.add('animate__animated', botonAnimacion);
-    boton.style.animationDelay = delayBoton;
-    boton.style.setProperty('--animate-duration', '1.5s');
-  });
+    botones.forEach((boton, j) => {
+      const delayBoton = `${elementos.length + j}s`;
+      const botonAnimacion = 'animate__fadeIn';
+  
+      // Reiniciar animación
+      boton.classList.remove('animate__animated', botonAnimacion);
+      boton.style.animationDelay = '0s';
+      boton.style.setProperty('--animate-duration', '0s');
+      void boton.offsetWidth;
+  
+      // Aplicar animación solo una vez
+      boton.classList.add('animate__animated', botonAnimacion);
+      boton.style.animationDelay = delayBoton;
+      boton.style.setProperty('--animate-duration', '1.5s');
+    });
   }
   
   // Scroll automático con animación
   let indiceActual = 0;
   let intervaloPresentacion;
+  let bloqueoScrollAbajo = false; // NUEVO: controlar bloqueo scroll hacia abajo
   
   function mostrarBloque(indice) {
     if (bloques[indice]) {
@@ -642,6 +641,7 @@ document.getElementById('boton').addEventListener('click', () => {
       indiceActual++;
       if (indiceActual >= bloques.length) {
         clearInterval(intervaloPresentacion);
+        bloqueoScrollAbajo = true; // ACTIVAMOS bloqueo scroll manual hacia abajo al llegar al último bloque
         return;
       }
       mostrarBloque(indiceActual);
@@ -656,7 +656,7 @@ document.getElementById('boton').addEventListener('click', () => {
         const index = [...bloques].indexOf(bloque);
         if (index !== -1) {
           aplicarAnimacionAlBloque(bloque, animaciones[index]);
-
+  
           // Si es el bloque de la cuenta regresiva (.bloque6), animar el contador también
           if (bloque.classList.contains('bloque6')) {
             const contador = document.getElementById('contadorAnimado');
@@ -673,14 +673,6 @@ document.getElementById('boton').addEventListener('click', () => {
   });
   
   bloques.forEach(bloque => observer.observe(bloque));
-
-  // Animar botones de ubicación
-//const botonesMaps = document.querySelectorAll('.boton-maps-elegante');
-//botonesMaps.forEach(boton => {
- // boton.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
-//});
-
- 
   
   // Código de partículas mágicas
   const particlesContainer = document.getElementById('particles');
@@ -735,32 +727,65 @@ document.getElementById('boton').addEventListener('click', () => {
     actualizarCuenta();
   });
   
-  // Animación infinita del botón después de la portada
- // setTimeout(() => {
-   // document.getElementById('boton').classList.add('animate__pulse', 'animate__infinite');
-  //}, 2000);
-
+  // Bloqueo scroll manual hacia abajo en último bloque
+  window.addEventListener('wheel', (e) => {
+    if (!bloqueoScrollAbajo) return;
+  
+    const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const totalHeight = document.body.scrollHeight;
+  
+    if (scrollY + viewportHeight >= totalHeight) {
+      if (e.deltaY > 0) {
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+  
+  window.addEventListener('touchmove', (e) => {
+    if (!bloqueoScrollAbajo) return;
+  
+    const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const totalHeight = document.body.scrollHeight;
+  
+    if (scrollY + viewportHeight >= totalHeight) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  window.addEventListener('keydown', (e) => {
+    if (!bloqueoScrollAbajo) return;
+  
+    const scrollY = window.scrollY || window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const totalHeight = document.body.scrollHeight;
+  
+    if (scrollY + viewportHeight >= totalHeight) {
+      const teclasAbajo = ['ArrowDown', 'PageDown', 'Space'];
+      if (teclasAbajo.includes(e.code)) {
+        e.preventDefault();
+      }
+    }
+  });
+  
+  // Función para comprobar orientación (ya la tienes, no la modifiqué)
   function checkOrientation() {
-  const warning = document.getElementById('landscape-warning');
-  if (window.innerHeight < window.innerWidth) {
-    // Estás en horizontal
-    warning.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Evita scroll
-  } else {
-    // Estás en vertical
-    warning.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const warning = document.getElementById('landscape-warning');
+    if (window.innerHeight < window.innerWidth) {
+      warning.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    } else {
+      warning.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
   }
-}
-
-  // Detecta cambios de orientación
+  
   window.addEventListener('resize', checkOrientation);
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
-
-
-</script>
   
+  </script>  
 
 
 </body>
