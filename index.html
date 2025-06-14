@@ -637,14 +637,14 @@ target="_blank">
     indiceActual = 0;
     mostrarBloque(indiceActual);
 
-    intervaloPresentacion = setInterval(() => {
-      indiceActual++;
-      if (indiceActual >= bloques.length) {
-  clearInterval(intervaloPresentacion);
-  return;
-}
-      mostrarBloque(indiceActual);
-    }, 10000);
+   intervaloPresentacion = setInterval(() => {
+  indiceActual++;
+  if (indiceActual >= bloques.length) {
+    clearInterval(intervaloPresentacion);
+    return;
+  }
+  mostrarBloque(indiceActual);
+}, 10000);
   }
 
   const observer = new IntersectionObserver((entries) => {
