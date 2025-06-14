@@ -372,7 +372,7 @@
 
     <!-- Título principal -->
     <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...44 </p>
+    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...4455 </p>
  
  <!-- Subtítulo -->
  <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
@@ -753,44 +753,20 @@ window.addEventListener('load', checkOrientation);
 
 // Bloquea scroll del body cuando estés haciendo scroll dentro del bloque7 al llegar al tope o final
 const bloque7 = document.querySelector('.bloque7');
-
-let startY = 0;
-
-// 🖱️ Manejar scroll con mouse (PC)
 bloque7.addEventListener('wheel', function(e) {
   const delta = e.deltaY;
   const scrollTop = bloque7.scrollTop;
   const scrollHeight = bloque7.scrollHeight;
   const clientHeight = bloque7.clientHeight;
 
-  const isScrollingDownAtBottom = delta > 0 && scrollTop + clientHeight >= scrollHeight;
-  const isScrollingUpAtTop = delta < 0 && scrollTop <= 0;
+  const atTop = scrollTop <= 0 && delta < 0;
+  const atBottom = scrollTop + clientHeight >= scrollHeight && delta > 0;
 
-  if (isScrollingDownAtBottom || isScrollingUpAtTop) {
-    e.preventDefault(); // Bloquea que el scroll se propague fuera de bloque7
+  if (atTop || atBottom) {
+    e.preventDefault(); // evita que el scroll se propague fuera del bloque
   }
 }, { passive: false });
 
-// 📱 Manejar scroll táctil (móvil)
-bloque7.addEventListener('touchstart', function(e) {
-  startY = e.touches[0].clientY;
-}, { passive: true });
-
-bloque7.addEventListener('touchmove', function(e) {
-  const currentY = e.touches[0].clientY;
-  const diffY = startY - currentY;
-
-  const scrollTop = bloque7.scrollTop;
-  const scrollHeight = bloque7.scrollHeight;
-  const clientHeight = bloque7.clientHeight;
-
-  const isScrollingDownAtBottom = diffY > 0 && scrollTop + clientHeight >= scrollHeight;
-  const isScrollingUpAtTop = diffY < 0 && scrollTop <= 0;
-
-  if (isScrollingDownAtBottom || isScrollingUpAtTop) {
-    e.preventDefault(); // Solo evita el scroll global, no el interno
-  }
-}, { passive: false });
 
 
 
