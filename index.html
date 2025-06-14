@@ -379,7 +379,7 @@
 
     <!-- Título principal -->
     <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...10 </p>
+    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...11 </p>
  
  <!-- Subtítulo -->
  <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
@@ -593,6 +593,10 @@ target="_blank">
     'animate__fadeInLeft'
   ];
 
+  function esIOS() {
+    return /iP(ad|hone|od)/.test(navigator.userAgent);
+  }
+
   function aplicarAnimacionAlBloque(bloque, animacion) {
     if (!bloque) return;
 
@@ -636,7 +640,15 @@ target="_blank">
     const bloque = bloques[indice];
     if (!bloque) return;
 
-    bloque.scrollIntoView({ behavior: 'smooth' });
+    if (indice === bloques.length - 1 && esIOS()) {
+      // No usar scrollIntoView en iOS para último bloque
+      window.scrollTo({ top: bloque.offsetTop, behavior: 'smooth' });
+    } else if (indice === bloques.length - 1) {
+      // No hacer nada, ya estamos en el último
+    } else {
+      bloque.scrollIntoView({ behavior: 'smooth' });
+    }
+
     aplicarAnimacionAlBloque(bloque, animaciones[indice]);
   }
 
@@ -652,7 +664,7 @@ target="_blank">
 
     intervaloPresentacion = setInterval(() => {
       indiceActual++;
-      if (indiceActual >= bloques.length) {
+      if (indiceActual >= bloques.length - 1) {
         clearInterval(intervaloPresentacion);
         return;
       }
@@ -682,7 +694,6 @@ target="_blank">
 
   bloques.forEach(bloque => observer.observe(bloque));
 
-  // Partículas mágicas
   const particlesContainer = document.getElementById('particles');
   for (let i = 0; i < 50; i++) {
     const p = document.createElement('div');
@@ -704,7 +715,6 @@ target="_blank">
     sparkleContainer.appendChild(s);
   }
 
-  // Cuenta regresiva
   let intervaloCuentaRegresiva;
   document.addEventListener('DOMContentLoaded', () => {
     const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
@@ -749,6 +759,7 @@ target="_blank">
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
 </script>
+
 
   
     
