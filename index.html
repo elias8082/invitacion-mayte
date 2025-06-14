@@ -490,35 +490,7 @@ img, video, iframe {
   }
 }
 
-.boton-entrada {
-  font-size: 1.3rem;
-  font-family: 'Rochester', cursive;
-  background: linear-gradient(135deg, #f5d06f, #d4af37);
-  border: none;
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border-radius: 40px;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-  transition: transform 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
 
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-/* Solo se ajustan detalles para pantallas pequeñas */
-@media (max-width: 768px) {
-  .boton-entrada {
-    font-size: 1rem;
-    padding: 0.5rem 1.2rem;
-    max-width: 85vw;
-  }
-}
   
 </style>
 </head>
@@ -552,13 +524,33 @@ img, video, iframe {
     style=" font-family: 'Rochester', cursive; font-size: 45px; color:  #b19335; text-align: center;">  Una princesa lista para brillar ✨ </p>
  
   
-    <button id="boton" onclick="iniciarPresentacion()" class="boton-entrada animate__animated animate__fadeIn animate__delay-3s"  
+    <button id="boton" onclick="iniciarPresentacion()" class="animate__animated animate__fadeIn animate__delay-3s"
+    style="
+      font-size: 28px;
+      font-family: 'Rochester', cursive;
+      background: linear-gradient(135deg, #f5d06f, #d4af37);
+      border: none;
+      color: white;
+      padding: 8px 8px;
+      border-radius: 40px;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+      transition: transform 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+  
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    ">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="white" class="corona-svg">
-    <path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
-    <path d="M5 18H19V20H5V18Z" fill="#fff"/>
-  </svg>
-  Entrar al reino
-</button>
+      <path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
+      <path d="M5 18H19V20H5V18Z" fill="#fff"/>
+    </svg>
+    Entrar al reino
+  </button>
 
   </div>
 
