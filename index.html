@@ -556,224 +556,223 @@ target="_blank">
 </div>
 </div>
 
-
 <script>
-  document.getElementById('boton').addEventListener('click', () => {
-    const sonido = document.getElementById('sonidoMagico');
-    if (sonido) sonido.play();
+document.getElementById('boton').addEventListener('click', () => {
+  const sonido = document.getElementById('sonidoMagico');
+  if (sonido) sonido.play();
+});
+
+const bloques = document.querySelectorAll('.bloque');
+const animaciones = [
+  'animate__bounceInLeft',
+  'animate__fadeInUp',
+  'animate__fadeInRight',
+  'animate__zoomIn',
+  'animate__flipInX',
+  'animate__fadeInDown',
+  'animate__fadeInLeft'
+];
+
+// Animar p e img dentro de cada bloque
+function aplicarAnimacionAlBloque(bloque, animacion) {
+  if (!bloque) return;
+
+  const elementos = bloque.querySelectorAll('p, img');
+  const botones = bloque.querySelectorAll('.boton-maps-elegante');
+
+  elementos.forEach((el, i) => {
+    const isImage = el.tagName.toLowerCase() === 'img';
+    const anim = isImage ? 'animate__fadeInDown' : animacion;
+    const delay = `${i}s`;
+
+    el.classList.remove('animate__animated', anim);
+    el.style.animationDelay = '0s';
+    el.style.setProperty('--animate-duration', '0s');
+    void el.offsetWidth;
+
+    el.classList.add('animate__animated', anim);
+    el.style.animationDelay = delay;
+    el.style.setProperty('--animate-duration', '2s');
   });
-  
-  const bloques = document.querySelectorAll('.bloque');
-  const animaciones = [
-    'animate__bounceInLeft',
-    'animate__fadeInUp',
-    'animate__fadeInRight',
-    'animate__zoomIn',
-    'animate__flipInX',
-    'animate__fadeInDown',
-    'animate__fadeInLeft'
-  ];
-  
-  // Aplica animaciones con delay a los p e img dentro de cada bloque
-  function aplicarAnimacionAlBloque(bloque, animacion) {
-    if (!bloque) return;
-  
-    const elementos = bloque.querySelectorAll('p, img');
-    const botones = bloque.querySelectorAll('.boton-maps-elegante');   
-  
-    elementos.forEach((el, i) => {
-      const isImage = el.tagName.toLowerCase() === 'img';
-      const anim = isImage ? 'animate__fadeInDown' : animacion;
-      const delay = `${i}s`;
-  
-      el.classList.remove('animate__animated', anim);
-      el.style.animationDelay = '0s';
-      el.style.setProperty('--animate-duration', '0s');
-      void el.offsetWidth; // reflow para reiniciar animación
-  
-      el.classList.add('animate__animated', anim);
-      el.style.animationDelay = delay;
-      el.style.setProperty('--animate-duration', '2s');
-    });
-  
-    botones.forEach((boton, j) => {
-      const delayBoton = `${elementos.length + j}s`;
-      const botonAnimacion = 'animate__fadeIn';
-  
-      boton.classList.remove('animate__animated', botonAnimacion);
-      boton.style.animationDelay = '0s';
-      boton.style.setProperty('--animate-duration', '0s');
-      void boton.offsetWidth;
-  
-      boton.classList.add('animate__animated', botonAnimacion);
-      boton.style.animationDelay = delayBoton;
-      boton.style.setProperty('--animate-duration', '1.5s');
-    });
+
+  botones.forEach((boton, j) => {
+    const delayBoton = `${elementos.length + j}s`;
+    const botonAnimacion = 'animate__fadeIn';
+
+    boton.classList.remove('animate__animated', botonAnimacion);
+    boton.style.animationDelay = '0s';
+    boton.style.setProperty('--animate-duration', '0s');
+    void boton.offsetWidth;
+
+    boton.classList.add('animate__animated', botonAnimacion);
+    boton.style.animationDelay = delayBoton;
+    boton.style.setProperty('--animate-duration', '1.5s');
+  });
+}
+
+let indiceActual = 0;
+let intervaloPresentacion;
+
+function mostrarBloque(indice) {
+  if (bloques[indice]) {
+    bloques[indice].scrollIntoView({ behavior: 'smooth' });
+    aplicarAnimacionAlBloque(bloques[indice], animaciones[indice]);
   }
-  
-  // Scroll automático con animación
-  let indiceActual = 0;
-  let intervaloPresentacion;
-  let presentacionFinalizada = false;
-  
-  function mostrarBloque(indice) {
-    if (bloques[indice]) {
-      bloques[indice].scrollIntoView({ behavior: 'smooth' });
-      aplicarAnimacionAlBloque(bloques[indice], animaciones[indice]);
+}
+
+// Variables para controlar bloqueo scroll hacia abajo
+let bloqueoScrollAbajo = false;
+
+function activarBloqueoScrollAbajo() {
+  bloqueoScrollAbajo = true;
+}
+
+function desactivarBloqueoScroll() {
+  bloqueoScrollAbajo = false;
+}
+
+function iniciarPresentacion() {
+  document.getElementById('portada').style.display = 'none';
+  document.getElementById('contenido').style.display = 'block';
+  const musica = document.getElementById('musicaFondo');
+  if (musica) musica.play();
+
+  indiceActual = 0;
+  mostrarBloque(indiceActual);
+
+  intervaloPresentacion = setInterval(() => {
+    indiceActual++;
+    if (indiceActual >= bloques.length) {
+      clearInterval(intervaloPresentacion);
+      // Activar bloqueo scroll hacia abajo en último bloque
+      activarBloqueoScrollAbajo();
+      return;
     }
-  }
-  
-  function activarBloqueoScroll() {
-    // Solo bloquear scroll si estamos en el último bloque
-    function bloquearScrollAbajo(e) {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-  
-      // Si el scroll está cerca del final, bloquea scroll hacia abajo
-      if (scrollTop + windowHeight >= docHeight - 5) {
-        if (e.deltaY > 0) { // scroll hacia abajo
-          e.preventDefault();
-          return false;
-        }
-      }
-    }
-  
-    window.addEventListener('wheel', bloquearScrollAbajo, { passive: false });
-    window.addEventListener('touchmove', function(e) {
-      // Prevenir scroll hacia abajo en touch si estamos al final
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-  
-      if (scrollTop + windowHeight >= docHeight - 5) {
-        e.preventDefault();
-        return false;
-      }
-    }, { passive: false });
-  }
-  
-  function iniciarPresentacion() {
-    document.getElementById('portada').style.display = 'none';
-    document.getElementById('contenido').style.display = 'block';
-    const musica = document.getElementById('musicaFondo');
-    if (musica) musica.play();
-  
-    indiceActual = 0;
     mostrarBloque(indiceActual);
-  
-    intervaloPresentacion = setInterval(() => {
-      indiceActual++;
-      if (indiceActual >= bloques.length) {
-        clearInterval(intervaloPresentacion);
-        presentacionFinalizada = true;
-        activarBloqueoScroll();  // Bloquea scroll manual hacia abajo al finalizar presentación
-        return;
-      }
-      mostrarBloque(indiceActual);
-    }, 10000); // Duración por bloque antes de cambiar
-  }
-  
-  // IntersectionObserver para animar al hacer scroll manual
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bloque = entry.target;
-        const index = [...bloques].indexOf(bloque);
-        if (index !== -1) {
-          aplicarAnimacionAlBloque(bloque, animaciones[index]);
-  
-          if (bloque.classList.contains('bloque6')) {
-            const contador = document.getElementById('contadorAnimado');
-            if (contador && !contador.classList.contains('animate__animated')) {
-              contador.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
-              contador.style.setProperty('--animate-duration', '2s');
-            }
+  }, 10000);
+}
+
+// IntersectionObserver para animar al hacer scroll manual
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bloque = entry.target;
+      const index = [...bloques].indexOf(bloque);
+      if (index !== -1) {
+        aplicarAnimacionAlBloque(bloque, animaciones[index]);
+
+        // Si es el bloque 6 (cuenta regresiva), animar contador
+        if (bloque.classList.contains('bloque6')) {
+          const contador = document.getElementById('contadorAnimado');
+          if (contador && !contador.classList.contains('animate__animated')) {
+            contador.classList.add('animate__animated', 'animate__zoomIn', 'animate__delay-1s');
+            contador.style.setProperty('--animate-duration', '2s');
           }
         }
       }
-    });
-  }, {
-    threshold: 0.5
-  });
-  bloques.forEach(bloque => observer.observe(bloque));
-  
-  // Código de partículas mágicas
-  const particlesContainer = document.getElementById('particles');
-  for (let i = 0; i < 50; i++) {
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.animationDuration = 6 + Math.random() * 6 + 's';
-    p.style.opacity = Math.random();
-    p.style.animationDelay = Math.random() * 10 + 's';
-    particlesContainer.appendChild(p);
-  }
-  
-  const sparkleContainer = document.getElementById('particles');
-  for (let i = 0; i < 20; i++) {
-    const s = document.createElement('div');
-    s.classList.add('sparkle');
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.top = Math.random() * 100 + 'vh';
-    s.style.animationDelay = Math.random() * 5 + 's';
-    sparkleContainer.appendChild(s);
-  }
-  
-  // Cuenta regresiva
-  let intervaloCuentaRegresiva;
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
-  
-    function actualizarCuenta() {
-      const ahora = new Date().getTime();
-      const diferencia = fechaEvento - ahora;
-  
-      if (diferencia <= 0) {
-        document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
-        clearInterval(intervaloCuentaRegresiva);
-        return;
-      }
-  
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-  
-      document.getElementById("dias").innerText = String(dias).padStart(2, '0');
-      document.getElementById("horas").innerText = String(horas).padStart(2, '0');
-      document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
-      document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
     }
-  
-    intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
-    actualizarCuenta();
   });
-  
-  // Animación infinita del botón después de la portada
-  // setTimeout(() => {
-  //   document.getElementById('boton').classList.add('animate__pulse', 'animate__infinite');
-  // }, 2000);
-  
-  function checkOrientation() {
-    const warning = document.getElementById('landscape-warning');
-    if (window.innerHeight < window.innerWidth) {
-      // Estás en horizontal
-      warning.style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Evita scroll
-    } else {
-      // Estás en vertical
-      warning.style.display = 'none';
-      document.body.style.overflow = 'auto';
+}, { threshold: 0.5 });
+
+bloques.forEach(bloque => observer.observe(bloque));
+
+// Código partículas mágicas (sin cambios)
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 50; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = 6 + Math.random() * 6 + 's';
+  p.style.opacity = Math.random();
+  p.style.animationDelay = Math.random() * 10 + 's';
+  particlesContainer.appendChild(p);
+}
+
+const sparkleContainer = document.getElementById('particles');
+for (let i = 0; i < 20; i++) {
+  const s = document.createElement('div');
+  s.classList.add('sparkle');
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.top = Math.random() * 100 + 'vh';
+  s.style.animationDelay = Math.random() * 5 + 's';
+  sparkleContainer.appendChild(s);
+}
+
+// Cuenta regresiva (sin cambios)
+let intervaloCuentaRegresiva;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const fechaEvento = new Date("August 2, 2025 19:00:00").getTime();
+
+  function actualizarCuenta() {
+    const ahora = new Date().getTime();
+    const diferencia = fechaEvento - ahora;
+
+    if (diferencia <= 0) {
+      document.querySelector(".cuenta-regresiva").innerHTML = "<h2>¡Ya comenzó el evento!</h2>";
+      clearInterval(intervaloCuentaRegresiva);
+      return;
     }
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    document.getElementById("dias").innerText = String(dias).padStart(2, '0');
+    document.getElementById("horas").innerText = String(horas).padStart(2, '0');
+    document.getElementById("minutos").innerText = String(minutos).padStart(2, '0');
+    document.getElementById("segundos").innerText = String(segundos).padStart(2, '0');
   }
-  
-  // Detecta cambios de orientación
-  window.addEventListener('resize', checkOrientation);
-  window.addEventListener('orientationchange', checkOrientation);
-  window.addEventListener('load', checkOrientation);
-  </script>
+
+  intervaloCuentaRegresiva = setInterval(actualizarCuenta, 1000);
+  actualizarCuenta();
+});
+
+// Bloqueo solo scroll hacia abajo (wheel y touch)
+window.addEventListener('wheel', (e) => {
+  if (!bloqueoScrollAbajo) return;
+  if (e.deltaY > 0) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+let touchStartY = 0;
+
+window.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    touchStartY = e.touches[0].clientY;
+  }
+}, { passive: false });
+
+window.addEventListener('touchmove', (e) => {
+  if (!bloqueoScrollAbajo) return;
+  if (e.touches.length !== 1) return;
+
+  const touchY = e.touches[0].clientY;
+  const delta = touchStartY - touchY;
+
+  if (delta > 0) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
+// Control de orientación (igual que antes)
+function checkOrientation() {
+  const warning = document.getElementById('landscape-warning');
+  if (window.innerHeight < window.innerWidth) {
+    warning.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  } else {
+    warning.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
+window.addEventListener('load', checkOrientation);
+</script>
     
 
 
