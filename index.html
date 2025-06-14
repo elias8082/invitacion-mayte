@@ -105,14 +105,27 @@
     background-size: cover;       /* Para que la imagen cubra todo el div */
     background-position: center;  /* Centra la imagen dentro del div */
     background-repeat: no-repeat; /* No repite la imagen */ }
-  .bloque7 { background-image: url('img/fondo_fin.png');
-    background-size: cover;       /* Para que la imagen cubra todo el div */
-    background-position: center;  /* Centra la imagen dentro del div */
-    background-repeat: no-repeat; /* No repite la imagen */ 
-    min-height: 100vh; /* mínimo igual a la pantalla */
-  height: auto;      /* que pueda crecer */
-  overflow-y: auto;  /* que pueda scrollear internamente si es más alto */
-  -webkit-overflow-scrolling: touch; /* para scroll suave en iOS */}
+    .bloque7 {
+  background-image: url('img/fondo_fin.png');
+  background-size: cover;       /* Para que la imagen cubra todo el div */
+  background-position: center;  /* Centra la imagen dentro del div */
+  background-repeat: no-repeat; /* No repite la imagen */
+
+  max-height: 100vh;            /* Máximo igual a la altura de la ventana */
+  height: 100vh;                /* Altura fija igual a la pantalla */
+  
+  overflow-y: auto;             /* Scroll interno vertical si contenido excede */
+  -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+  
+  position: relative;           /* Para contener elementos posicionados */
+}
+
+
+.bloque7 img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
 
     .boton-maps-elegante {
     display: inline-block;
@@ -620,16 +633,6 @@ function mostrarBloque(indice) {
   }
 }
 
-// Variables para controlar bloqueo scroll hacia abajo
-let bloqueoScrollAbajo = false;
-
-function activarBloqueoScrollAbajo() {
-  bloqueoScrollAbajo = true;
-}
-
-function desactivarBloqueoScroll() {
-  bloqueoScrollAbajo = false;
-}
 
 function iniciarPresentacion() {
   document.getElementById('portada').style.display = 'none';
@@ -729,33 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
   actualizarCuenta();
 });
 
-// Bloqueo solo scroll hacia abajo (wheel y touch)
-window.addEventListener('wheel', (e) => {
-  if (!bloqueoScrollAbajo) return;
-  if (e.deltaY > 0) {
-    e.preventDefault();
-  }
-}, { passive: false });
 
-let touchStartY = 0;
-
-window.addEventListener('touchstart', (e) => {
-  if (e.touches.length === 1) {
-    touchStartY = e.touches[0].clientY;
-  }
-}, { passive: false });
-
-window.addEventListener('touchmove', (e) => {
-  if (!bloqueoScrollAbajo) return;
-  if (e.touches.length !== 1) return;
-
-  const touchY = e.touches[0].clientY;
-  const delta = touchStartY - touchY;
-
-  if (delta > 0) {
-    e.preventDefault();
-  }
-}, { passive: false });
 
 // Control de orientación (igual que antes)
 function checkOrientation() {
