@@ -106,27 +106,18 @@
     background-position: center;  /* Centra la imagen dentro del div */
     background-repeat: no-repeat; /* No repite la imagen */ }
    .bloque7 {
-   min-height: 100vh;
-  height: auto;
-  overflow-y: auto;
-  overscroll-behavior: contain; /* Evita que el scroll rebote */
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  background-color: #333; /* o el fondo que uses */
-     scroll-snap-align: none;
-
-
-  /*background-image: url('');
+  background-image: url('');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   min-height: 100vh;
   height: auto;
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  position: relative;*/
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal;
+  position: relative;
 }
 
 
@@ -768,6 +759,18 @@ target="_blank">
   window.addEventListener('resize', checkOrientation);
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
+
+  // Previene el "brinco" en el bloque 7 al hacer scroll hacia abajo
+const bloque7 = document.querySelector('.bloque7');
+
+if (bloque7) {
+  bloque7.addEventListener('scroll', () => {
+    const maxScrollTop = bloque7.scrollHeight - bloque7.clientHeight;
+    if (bloque7.scrollTop >= maxScrollTop - 1) {
+      bloque7.scrollTop = maxScrollTop;
+    }
+  });
+}
 </script>
 
 
