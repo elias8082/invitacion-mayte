@@ -113,6 +113,7 @@
 
   height: 100vh;
   overflow-y: auto;
+  overscroll-behavior: contain; /* Evita que el scroll "salte" al body */
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
@@ -343,6 +344,11 @@
   .bloque, #portada, #contenido {
     overflow-x: hidden;
   }
+}
+
+body.no-scroll {
+  overflow: hidden !important;
+  touch-action: none !important;
 }
   
 </style>
@@ -750,21 +756,60 @@ window.addEventListener('load', checkOrientation);
 
 // Bloquea scroll del body cuando estés haciendo scroll dentro del bloque7 al llegar al tope o final
 const bloque7 = document.querySelector('.bloque7');
+
 if (bloque7) {
-  bloque7.addEventListener('wheel', (e) => {
+  // Bloquear scroll del body cuando estés dentro de bloque7
+  function bloquearScrollBody() {
+    document.body.classList.add('no-scroll');
+  }
+  function liberarScrollBody() {
+    document.body.classList.remove('no-scroll');
+  }
+
+  // Detecta cuando el mouse está dentro de bloque7 para bloquear scroll body
+  bloque7.addEventListener('mouseenter', bloquearScrollBody);
+  bloque7.addEventListener('mouseleave', liberarScrollBody);
+
+  // Para dispositivos táctiles, activa bloqueo scroll body al tocar bloque7
+  bloque7.addEventListener('touchstart', bloquearScrollBody);
+  bloque7.addEventListener('touchend', liberarScrollBody);
+
+  // Manejo scroll con rueda (desktop)
+  bloque7.addEventListener('wheel', function(e) {
     const delta = e.deltaY;
     const scrollTop = bloque7.scrollTop;
     const scrollHeight = bloque7.scrollHeight;
     const clientHeight = bloque7.clientHeight;
 
     if (
-      (delta > 0 && scrollTop + clientHeight >= scrollHeight - 1) || // -1 para evitar redondeos
-      (delta < 0 && scrollTop <= 1)
+      (delta > 0 && scrollTop + clientHeight >= scrollHeight) || // scroll down y ya en final
+      (delta < 0 && scrollTop <= 0)                              // scroll up y ya en inicio
+    ) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Manejo scroll táctil (mobile)
+  bloque7.addEventListener('touchstart', (e) => {
+    bloque7.startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  bloque7.addEventListener('touchmove', (e) => {
+    const currentY = e.touches[0].clientY;
+    const deltaY = bloque7.startY - currentY;
+    const scrollTop = bloque7.scrollTop;
+    const scrollHeight = bloque7.scrollHeight;
+    const clientHeight = bloque7.clientHeight;
+
+    if (
+      (deltaY > 0 && scrollTop + clientHeight >= scrollHeight) || // scroll down y en final
+      (deltaY < 0 && scrollTop <= 0)                              // scroll up y en inicio
     ) {
       e.preventDefault();
     }
   }, { passive: false });
 }
+
 
 
 
