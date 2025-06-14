@@ -750,22 +750,22 @@ window.addEventListener('load', checkOrientation);
 
 // Bloquea scroll del body cuando estés haciendo scroll dentro del bloque7 al llegar al tope o final
 const bloque7 = document.querySelector('.bloque7');
-
 if (bloque7) {
-  bloque7.addEventListener('wheel', function(e) {
+  bloque7.addEventListener('wheel', (e) => {
     const delta = e.deltaY;
     const scrollTop = bloque7.scrollTop;
     const scrollHeight = bloque7.scrollHeight;
     const clientHeight = bloque7.clientHeight;
 
     if (
-      (delta > 0 && scrollTop + clientHeight >= scrollHeight) ||
-      (delta < 0 && scrollTop <= 0)
+      (delta > 0 && scrollTop + clientHeight >= scrollHeight - 1) || // -1 para evitar redondeos
+      (delta < 0 && scrollTop <= 1)
     ) {
       e.preventDefault();
     }
   }, { passive: false });
 }
+
 
 
 </script>
