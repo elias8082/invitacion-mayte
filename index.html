@@ -756,6 +756,32 @@
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
 
+  // --- ACTUALIZAR .active EN BLOQUES DURANTE SCROLL MANUAL ---
+window.addEventListener('load', () => {
+  const bloques = document.querySelectorAll('.bloque');
+
+  function actualizarActivo() {
+    const vh = window.innerHeight;
+
+    bloques.forEach(bloque => {
+      const rect = bloque.getBoundingClientRect();
+      const estaVisible = rect.top < vh / 2 && rect.bottom > vh / 2;
+
+      if (estaVisible) {
+        bloques.forEach(b => b.classList.remove('active'));
+        bloque.classList.add('active');
+      }
+    });
+  }
+
+  // Actualiza al hacer scroll o cambiar tamaño
+  window.addEventListener('scroll', actualizarActivo);
+  window.addEventListener('resize', actualizarActivo);
+
+  // Ejecutar al cargar
+  actualizarActivo();
+});
+
 </script>
 
   
