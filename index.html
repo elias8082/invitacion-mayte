@@ -106,26 +106,11 @@
     background-position: center;  /* Centra la imagen dentro del div */
     background-repeat: no-repeat; /* No repite la imagen */ }
    .bloque7 {
-  background-image: url('');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  height: auto;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-align: none !important;
-  scroll-snap-stop: normal;
-  position: relative;
-}
-
-
-.bloque7 img {
-  max-height: 100%;
-  width: auto;
-  object-fit: contain;
-}
+  background-image: url('img/fondo_fin.png');
+  background-size: cover;       /* Para que la imagen cubra todo el div */
+  background-position: center;  /* Centra la imagen dentro del div */
+  background-repeat: no-repeat; /* No repite la imagen */ }
+  
 
     .boton-maps-elegante {
     display: inline-block;
@@ -594,10 +579,7 @@ target="_blank">
     'animate__fadeInLeft'
   ];
 
-  function esIOS() {
-    return /iP(ad|hone|od)/.test(navigator.userAgent);
-  }
-
+  
   function aplicarAnimacionAlBloque(bloque, animacion) {
     if (!bloque) return;
 
@@ -752,22 +734,8 @@ target="_blank">
   window.addEventListener('orientationchange', checkOrientation);
   window.addEventListener('load', checkOrientation);
 
-  // Previene el "brinco" en el bloque 7 al hacer scroll hacia abajo
-const bloque7 = document.querySelector('.bloque7');
-
-if (bloque7) {
-  bloque7.addEventListener('scroll', () => {
-    const maxScrollTop = bloque7.scrollHeight - bloque7.clientHeight;
-    if (bloque7.scrollTop >= maxScrollTop - 1) {
-      bloque7.scrollTop = maxScrollTop;
-    }
-  });
-}
 </script>
 
-
-  
-    
 
 
 </body>
