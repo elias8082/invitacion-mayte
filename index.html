@@ -372,7 +372,7 @@
 
     <!-- Título principal -->
     <p class="animate__animated animate__fadeInDown animate__slower flotar-magico"
-    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...4455 </p>
+    style="font-family: 'Rochester', cursive; font-size: 65px; color: #FFFFFF; text-align: center; padding-top: 50px;"> Érase una vez...8877 </p>
  
  <!-- Subtítulo -->
  <p class="animate__animated animate__fadeInUp animate__delay-1s animate__slower"
@@ -647,10 +647,14 @@ function iniciarPresentacion() {
     indiceActual++;
     if (indiceActual >= bloques.length) {
       clearInterval(intervaloPresentacion);
-      // Activar bloqueo scroll hacia abajo en último bloque
-      activarBloqueoScrollAbajo();
-      return;
-    }
+       // Esperamos a que scrollIntoView termine (600ms aprox)
+  setTimeout(() => {
+    const bloque7 = document.querySelector('.bloque7');
+    bloque7.scrollTop = 0; // Forzamos al inicio del bloque
+  }, 700);
+
+  return;
+}
     mostrarBloque(indiceActual);
   }, 10000);
 }
