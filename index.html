@@ -42,12 +42,12 @@
 
     .bg1 { background: url('img/SAPO01.jpeg') no-repeat center center/cover; }
     .bg2 { background: url('img/fondo_portada.png') no-repeat center center/cover; }
-    .bg3 { background: url('img/fondo_bloque02.png') no-repeat center center/cover;}
-    .bg4 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg3 { background: url('img/fondo_bloque03.png') no-repeat center center/cover;}
+    .bg4 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
     .bg5 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: flex-start; }
     .bg6 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; }
     .bg7 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
-    .bg8 { background: url('img/fondo_fin.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg8 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; }
 
     h1, h2, p {
       margin-bottom: 1rem;
@@ -350,6 +350,59 @@ body, html {
   opacity: 0;
 }
 
+.titulo-bloque {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(40px, 6vw, 52px);
+  color: #134915;
+  margin-bottom: 1rem;
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.card-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #9f7d18, #134915);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.titulo-card {
+  font-family: 'Great Vibes', cursive;
+  color: #134915;
+  font-size: clamp(30px, 5vw, 40px);
+  margin-bottom: 1rem;
+}
+
+.nombre-card {
+  font-family: 'Great Vibes', cursive;
+  color: #9f7d18;
+  font-size: clamp(26px, 4vw, 36px);
+  margin-bottom: 0.5rem;
+}
+
+.medallon-decorativo {
+  width: clamp(80px, 10vw, 120px);
+}
+
+
   </style>
 </head>
 <body>
@@ -426,7 +479,7 @@ body, html {
       
 
   <!-- Bloque 3 -->
-  <section class="bg3 text-center px-3 py-4" style="padding-top: 60px;">
+  <section class="bg3 text-center px-3 py-4 style="padding-top: 60px;">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">
         <p class="animate__animated animate__zoomIn"
@@ -443,85 +496,53 @@ body, html {
     </div>
   </section>
 
-  <!-- Bloque 4 -->
-<section class="bg4 text-center px-3 py-4" style="padding-top: 60px;">
-  <div class="row justify-content-center">
 
-    <div class="col-12">
-      <p class="animate__animated animate__zoomIn"
-         style="animation-delay: 0s; --animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #134915;
-                font-size: clamp(42px, 5vw, 52px);">
-        En compañía de
-      </p>
 
-      <p class="animate__animated animate__zoomIn animate__delay-1s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #134915;
-                font-size: clamp(34px, 4.5vw, 40px);">
-        Mis Padres
-      </p>
+ <!-- Bloque 4 -->
+ <section class="bg4 text-center px-3 py-5">
+  <div class="container">
+    <h2 class="titulo-bloque animate__animated animate__fadeInDown">
+      En compañía de
+    </h2>
 
-      <p class="animate__animated animate__fadeInDown animate__delay-2s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #9f7d18;
-                font-size: clamp(30px, 4vw, 36px);">
-        Ivon Chávez García
-      </p>
-
-      <p class="animate__animated animate__fadeInDown animate__delay-3s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #9f7d18;
-                font-size: clamp(30px, 4vw, 36px);">
-        José Carlos Infante Arenas
-      </p>
-
-      <!-- Imagen decorativa -->
-      <div class="animate__animated animate__fadeInDown animate__delay-4s"
-           style="--animate-duration: 2s;">
-        <img src="img/pleca_invite01.png"
-             alt="Imagen decorativa"
-             class="img-fluid mx-auto d-block"
-             style="width: clamp(180px, 40vw, 280px);">
+    <div class="row align-items-center mt-5 gy-4">
+      <!-- Mis Padres -->
+      <div class="col-12 col-md-5">
+        <div class="card card-glass animate__animated animate__zoomIn anim-escondida">
+          <div class="card-body">
+            <h5 class="titulo-card">Mis Padres</h5>
+            <p class="nombre-card">Ivon Chávez García</p>
+            <p class="nombre-card">José Carlos Infante Arenas</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Padrinos -->
-      <p class="animate__animated animate__zoomIn animate__delay-5s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #134915;
-                font-size: clamp(34px, 4.5vw, 40px);
-                padding-top: 24px;">
-        Mis Padrinos
-      </p>
+      <!-- Medallón decorativo central -->
+      <div class="col-12 col-md-2 d-flex justify-content-center">
+        <img src="img/adorno_central.png"
+             alt="Decoración"
+             class="medallon-decorativo animate__animated animate__zoomIn animate__delay-1s">
+      </div>
 
-      <p class="animate__animated animate__zoomIn animate__delay-6s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #9f7d18;
-                font-size: clamp(30px, 4vw, 36px);">
-        Lina Miriam Chávez García
-      </p>
-
-      <p class="animate__animated animate__zoomIn animate__delay-7s"
-         style="--animate-duration: 2s;
-                font-family: 'Great Vibes', cursive;
-                color: #9f7d18;
-                font-size: clamp(30px, 4vw, 36px);">
-        Cristian Toledano Huipio
-      </p>
+      <!-- Mis Padrinos -->
+      <div class="col-12 col-md-5">
+        <div class="card card-glass animate__animated animate__zoomIn anim-escondida">
+          <div class="card-body">
+            <h5 class="titulo-card">Mis Padrinos</h5>
+            <p class="nombre-card">Lina Miriam Chávez García</p>
+            <p class="nombre-card">Cristian Toledano Huipio</p>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </section>
 
 
+
+
  <!-- Bloque 5 -->
-<section class="bg5 text-center px-3 py-4" style="padding-top: 60px;">
+<section class="bg5 text-center px-3 " style="padding-top: 60px;">
   <div class="row justify-content-center">
 
     <div class="col-12">
@@ -566,7 +587,7 @@ body, html {
 
 
   <!-- Bloque 6 -->
-  <section class="bg6 text-center px-3 py-4" style="padding-top: 60px;">
+  <section class="bg6 text-center px-3 " style="padding-top: 60px;">
     <div class="row justify-content-center">
   
       <div class="col-12">
@@ -628,7 +649,7 @@ body, html {
   
 
   <!-- Bloque 7 -->
-<section class="bg7 text-center px-3 py-4" style="padding-top: 60px;">
+<section class="bg7 text-center px-3 " style="padding-top: 60px;">
   <div class="row justify-content-center">
 
     <div class="col-12">
@@ -669,7 +690,7 @@ body, html {
 
 
   <!-- Bloque 8 -->
-<section class="bg8 text-center py-4 px-3" style="padding-top: 60px;">
+<section class="bg8 text-center px-3 " style="padding-top: 60px;">
   <div class="row justify-content-center">
     
     <div class="col-12">
@@ -921,7 +942,8 @@ function reiniciarAnimacion(elemento) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const animElements = document.querySelectorAll('p[class*="animate__"], img[class*="animate__"], .tiempo[class*="animate__"], a[class*="animate__"]');
+  // AQUI ES IMPORTANTE POR QUE SE DECLARAN LO QUE QUEREMOS QUE TENGA ANIMACION COM P. IMG. ETC
+  const animElements = document.querySelectorAll('p[class*="animate__"], img[class*="animate__"], .tiempo[class*="animate__"], a[class*="animate__"], .card[class*="animate__"]');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
