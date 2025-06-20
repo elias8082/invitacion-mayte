@@ -41,13 +41,13 @@
     }
 
     .bg1 { background: url('img/SAPO01.jpeg') no-repeat center center/cover; }
-    .bg2 { background: url('img/fondo_portada.png') no-repeat center center/cover; padding-top: 50%;}
-    .bg3 { background: url('img/fondo_bloque02.png') no-repeat center center/cover; justify-content: flex-start; padding-top: 15%;}
-    .bg4 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; padding-top: 10%;}
-    .bg5 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: flex-start; padding-top: 10%;}
-    .bg6 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; padding-top: 10%;}
-    .bg7 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; padding-top: 10%;}
-    .bg8 { background: url('img/fondo_fin.png') no-repeat center center/cover; }
+    .bg2 { background: url('img/fondo_portada.png') no-repeat center center/cover; }
+    .bg3 { background: url('img/fondo_bloque02.png') no-repeat center center/cover;}
+    .bg4 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg5 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg6 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg7 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg8 { background: url('img/fondo_fin.png') no-repeat center center/cover; justify-content: flex-start; }
 
     h1, h2, p {
       margin-bottom: 1rem;
@@ -65,7 +65,7 @@
         transition: transform 0.3s;
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        /*gap: 10px;*/
 
         position: absolute;
         left: 10px;
@@ -376,220 +376,327 @@ body, html {
 
   <!-- Portada -->
   <section id="portada"
-  class="min-vh-100 d-flex flex-column justify-content-start align-items-center bg1 text-white text-center"
-  style="padding: 1rem;">
+  class="min-vh-100 d-flex flex-column justify-content-start align-items-center bg1 text-white text-center px-3 py-5">
 
-<p class="animate__animated animate__fadeIn"
-style="--animate-duration: 1.5s; font-family: 'Rochester', cursive; font-size: clamp(50px, 6vw, 65px);">
-Érase una vez...
-</p>
+  <p class="animate__animated animate__fadeIn"
+     style="--animate-duration: 1.5s; font-family: 'Rochester', cursive; font-size: clamp(50px, 6vw, 65px);">
+    Érase una vez...
+  </p>
 
-<p class="animate__animated animate__fadeIn"
-style="animation-delay: 1s; --animate-duration: 1.5s; font-family: 'Rochester', cursive; font-size: clamp(38px, 5vw, 40px); color: #b19335;">
-Una princesa lista para brillar ✨
-</p>
+  <p class="animate__animated animate__fadeIn"
+     style="animation-delay: 1s; --animate-duration: 1.5s; font-family: 'Rochester', cursive; font-size: clamp(38px, 5vw, 40px); color: #b19335;">
+    Una princesa lista para brillar ✨
+  </p>
 
-<button id="verInvitacion"
-   class="btn btn-primary animate__animated animate__fadeIn mt-4"
-   style="animation-delay: 2s; --animate-duration: 1.5s; font-size: clamp(18px, 4vw, 24px); padding: 0.6rem 1.2rem;">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="white" class="corona-svg me-2">
-<path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
-<path d="M5 18H19V20H5V18Z" fill="#fff"/>
-</svg>
-Entrar al reino
-</button>
+  <button id="verInvitacion"
+     class="btn btn-primary animate__animated animate__fadeIn mt-4"
+     style="animation-delay: 2s; --animate-duration: 1.5s; font-size: clamp(22px, 4vw, 24px); padding: 0.6rem 1.2rem;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white" class="corona-svg me-2">
+      <path d="M5 16L3 5L9 11L12 5L15 11L21 5L19 16H5Z" fill="white"/>
+      <path d="M5 18H19V20H5V18Z" fill="#fff"/>
+    </svg>
+    Entrar al reino
+  </button>
 </section>
 
-  <div id="contenido" style="display: none;">  
 
+  <div id="contenido" style="display: none;">  
    
       <!-- Bloque 2 -->
-  <section id="bloque1" class="bg2">
-
-   
-    <p class="animate__zoomIn anim-escondida" style=" animation-delay: 0s; --animate-duration: 1.5s; color: #9f7d18; font-size: 60px; text-align: center; font-family: 'Charm', cursive; font-weight: 600; ">Mis XV Años</p>  
-    <center><img src="img/marco004.png"  class="animate__zoomIn anim-escondida img-fluid" style="animation-delay: 1s; --animate-duration: 2s;"></center>      
-    <p class="animate__zoomIn anim-escondida" style="animation-delay: 2s; --animate-duration: 1.5s; color: #9f7d18; font-size: 90px; text-align: center; font-family: 'Rochester', cursive; ">Lia Mayte</p>
-  </section>
+      <section id="bloque1" class="bg2 py-4 px-3 text-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <p class="animate__zoomIn anim-escondida"
+                 style="animation-delay: 0s; --animate-duration: 1.5s; color: #9f7d18; font-size: clamp(30px, 6vw, 60px); font-family: 'Charm', cursive; font-weight: 600;">
+                Mis XV Años
+              </p>
+              <img src="img/marco004.png" 
+                   class="animate__zoomIn anim-escondida img-fluid mx-auto d-block" 
+                   style="animation-delay: 1s; --animate-duration: 2s;" 
+                   alt="Marco decorativo">
+              <p class="animate__zoomIn anim-escondida"
+                 style="animation-delay: 2s; --animate-duration: 1.5s; color: #9f7d18; font-size: clamp(40px, 9vw, 90px); font-family: 'Rochester', cursive;">
+                Lia Mayte
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
 
   <!-- Bloque 3 -->
   <section class="bg3 text-center px-3 py-4">
-    <p class="animate__animated animate__zoomIn"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(26px, 4.5vw, 36px); 
-              line-height: 1.6;">
-      Con la guía de Dios y el amor incondicional de mis padres, hoy me llena de alegría poder compartir un instante tan significativo en mi vida.<br>
-      Ha llegado el momento de cerrar una etapa, dejar atrás mi niñez y dar los primeros pasos hacia un camino nuevo, lleno de esperanzas, ilusiones y sueños.
-    </p>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10">
+        <p class="animate__animated animate__zoomIn"
+           style="animation-delay: 0s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(38px, 5vw, 52px);">
+          El Inicio de un Sueño
+        </p>
+
+        <p class="animate__animated animate__zoomIn"
+           style="--animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #9f7d18; font-size: clamp(26px, 4.5vw, 36px); line-height: 1.6;">
+          Con la guía de Dios y el amor incondicional de mis padres, hoy me llena de alegría poder compartir un instante tan significativo en mi vida.<br>
+          Ha llegado el momento de cerrar una etapa, dejar atrás mi niñez y dar los primeros pasos hacia un camino nuevo, lleno de esperanzas, ilusiones y sueños.
+        </p>
+      </div>
+    </div>
   </section>
 
   <!-- Bloque 4 -->
-  <section class="bg4 text-center px-3 py-4">
-    <p class="animate__animated animate__zoomIn"
-       style="animation-delay: 0s; --animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #134915;
-              font-size: clamp(42px, 5vw, 52px);">
-      En compañía de
-    </p>
-  
-    <p class="animate__animated animate__fadeInRight animate__delay-1s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #134915;
-              font-size: clamp(34px, 4.5vw, 40px);">
-      Mis Padres
-    </p>
-  
-    <p class="animate__animated animate__fadeInDown animate__delay-2s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      Ivon Chávez García
-    </p>
-  
-    <p class="animate__animated animate__fadeInDown animate__delay-3s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      José Carlos Infante Arenas
-    </p>
-  
-    <div class="text-center animate__animated animate__fadeInDown animate__delay-4s" style="--animate-duration: 2s;">
-      <img src="img/pleca_invite01.png" alt="Imagen decorativa"
-           class="img-fluid" style="width: clamp(180px, 40vw, 280px);">
+<section class="bg4 text-center px-3 py-4">
+  <div class="row justify-content-center">
+
+    <div class="col-12">
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 0s; --animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #134915;
+                font-size: clamp(42px, 5vw, 52px);">
+        En compañía de
+      </p>
+
+      <p class="animate__animated animate__fadeInRight animate__delay-1s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #134915;
+                font-size: clamp(34px, 4.5vw, 40px);">
+        Mis Padres
+      </p>
+
+      <p class="animate__animated animate__fadeInDown animate__delay-2s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #9f7d18;
+                font-size: clamp(30px, 4vw, 36px);">
+        Ivon Chávez García
+      </p>
+
+      <p class="animate__animated animate__fadeInDown animate__delay-3s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #9f7d18;
+                font-size: clamp(30px, 4vw, 36px);">
+        José Carlos Infante Arenas
+      </p>
+
+      <!-- Imagen decorativa -->
+      <div class="animate__animated animate__fadeInDown animate__delay-4s"
+           style="--animate-duration: 2s;">
+        <img src="img/pleca_invite01.png"
+             alt="Imagen decorativa"
+             class="img-fluid mx-auto d-block"
+             style="width: clamp(180px, 40vw, 280px);">
+      </div>
+
+      <!-- Padrinos -->
+      <p class="animate__animated animate__fadeInRight animate__delay-5s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #134915;
+                font-size: clamp(34px, 4.5vw, 40px);
+                padding-top: 24px;">
+        Mis Padrinos
+      </p>
+
+      <p class="animate__animated animate__zoomIn animate__delay-6s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #9f7d18;
+                font-size: clamp(30px, 4vw, 36px);">
+        Lina Miriam Chávez García
+      </p>
+
+      <p class="animate__animated animate__zoomIn animate__delay-7s"
+         style="--animate-duration: 2s;
+                font-family: 'Great Vibes', cursive;
+                color: #9f7d18;
+                font-size: clamp(30px, 4vw, 36px);">
+        Cristian Toledano Huipio
+      </p>
     </div>
 
-    <p style="padding-top: 16px;"></p>
-  
-    <p class="animate__animated animate__fadeInRight animate__delay-5s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #134915;
-              font-size: clamp(34px, 4.5vw, 40px);">
-      Mis Padrinos
-    </p>
-  
-    <p class="animate__animated animate__zoomIn animate__delay-6s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      Lina Miriam Chávez García
-    </p>
-  
-    <p class="animate__animated animate__zoomIn animate__delay-7s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      Cristian Toledano Huipio
-    </p>
-  </section>
-  
+  </div>
+</section>
 
-  <!-- Bloque 5 -->
-  <section class="bg5">
-    <p class="animate__fadeInLeft" style="color: #134915; font-size: 52px; text-align: center; font-family: 'Great Vibes', cursive;">¡Te invito! </p>         
-    <p class="animate__zoomIn" style="animation-delay: 1s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">A que me acompañes a celebrar
-      una noche encantada donde los sueños se hacen realidad...</p> 
-      <p class="animate__fadeInLeft" style="animation-delay: 2s; color: #134915; font-size: 40px; text-align: center; font-family: 'Great Vibes', cursive;">Sábado</p>
-      <p class="animate__fadeInLeft" style="animation-delay: 3s; color: #9f7d18; font-size: 36px; text-align: center; font-family: 'Great Vibes', cursive;">2 de agosto de 2025</p>  
-  </section>
+
+ <!-- Bloque 5 -->
+<section class="bg5 text-center px-3 py-4">
+  <div class="row justify-content-center">
+
+    <div class="col-12">
+      <p class="animate__animated animate__fadeInLeft"
+         style="--animate-duration: 2s;
+                color: #134915;
+                font-size: clamp(36px, 6vw, 52px);
+                font-family: 'Great Vibes', cursive;">
+        ¡Te invito!
+      </p>
+
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 1s; --animate-duration: 2s;
+                color: #9f7d18;
+                font-size: clamp(28px, 5vw, 36px);
+                font-family: 'Great Vibes', cursive;">
+        A que me acompañes a celebrar<br>
+        una noche encantada donde los sueños se hacen realidad...
+      </p>
+    </div>
+
+    <div class="col-12 pt-3">
+      <p class="animate__animated animate__fadeInLeft"
+         style="animation-delay: 2s; --animate-duration: 2s;
+                color: #134915;
+                font-size: clamp(30px, 5vw, 40px);
+                font-family: 'Great Vibes', cursive;">
+        Sábado
+      </p>
+
+      <p class="animate__animated animate__fadeInLeft"
+         style="animation-delay: 3s; --animate-duration: 2s;
+                color: #9f7d18;
+                font-size: clamp(28px, 5vw, 36px);
+                font-family: 'Great Vibes', cursive;">
+        2 de agosto de 2025
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Bloque 6 -->
   <section class="bg6 text-center px-3 py-4">
-    <p class="animate__animated animate__fadeInLeft"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #134915;
-              font-size: clamp(42px, 5vw, 52px);">
-      Ceremonia
-    </p>
+    <div class="row justify-content-center">
   
-    <p class="animate__animated animate__zoomIn animate__delay-1s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      Parroquia de la Resurrección del Señor<br>
-      Hora: 18:00 hrs
-    </p>
+      <div class="col-12">
+        <p class="animate__animated animate__fadeInLeft"
+           style="--animate-duration: 2s;
+                  font-family: 'Great Vibes', cursive;
+                  color: #134915;
+                  font-size: clamp(42px, 5vw, 52px);">
+          Ceremonia
+        </p>
   
-    <div class="animate__animated animate__zoomIn animate__delay-2s" style="--animate-duration: 2s;">
-      <a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank"
-         class="boton-maps-elegante d-inline-block mt-2">
-        <i class="fas fa-map-marker-alt"></i> Ver ubicación
-      </a>
-    </div>
+        <p class="animate__animated animate__zoomIn animate__delay-1s"
+           style="--animate-duration: 2s;
+                  font-family: 'Great Vibes', cursive;
+                  color: #9f7d18;
+                  font-size: clamp(30px, 4vw, 36px);">
+          Parroquia de la Resurrección del Señor<br>
+          Hora: 18:00 hrs
+        </p>
   
-    <p class="animate__animated animate__fadeInLeft animate__delay-3s"
-       style="--animate-duration: 2s; padding-top: 24px;"></p>
+        <div class="animate__animated animate__zoomIn animate__delay-2s"
+             style="--animate-duration: 2s;">
+          <a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank"
+             class="boton-maps-elegante d-inline-block mt-2">
+            <i class="fas fa-map-marker-alt"></i> Ver ubicación
+          </a>
+        </div>
+      </div>
   
-    <p class="animate__animated animate__zoomIn animate__delay-4s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #134915;
-              font-size: clamp(42px, 5vw, 46px);">
-      Recepción
-    </p>
+      <!-- Espaciado entre bloques -->
+      <div class="col-12 pt-4">
+        <p class="animate__animated animate__zoomIn animate__delay-4s"
+           style="--animate-duration: 2s;
+                  font-family: 'Great Vibes', cursive;
+                  color: #134915;
+                  font-size: clamp(42px, 5vw, 46px);">
+          Recepción
+        </p>
   
-    <p class="animate__animated animate__zoomIn animate__delay-5s"
-       style="--animate-duration: 2s;
-              font-family: 'Great Vibes', cursive;
-              color: #9f7d18;
-              font-size: clamp(30px, 4vw, 36px);">
-      Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.
-    </p>
+        <p class="animate__animated animate__zoomIn animate__delay-5s"
+           style="--animate-duration: 2s;
+                  font-family: 'Great Vibes', cursive;
+                  color: #9f7d18;
+                  font-size: clamp(30px, 4vw, 36px);">
+          Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.
+        </p>
   
-    <div class="animate__animated animate__zoomIn animate__delay-6s" style="--animate-duration: 2s;">
-      <a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank"
-         class="boton-maps-elegante d-inline-block mt-2">
-        <i class="fas fa-map-marker-alt"></i> Ver ubicación
-      </a>
+        <div class="animate__animated animate__zoomIn animate__delay-6s"
+             style="--animate-duration: 2s;">
+          <a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank"
+             class="boton-maps-elegante d-inline-block mt-2">
+            <i class="fas fa-map-marker-alt"></i> Ver ubicación
+          </a>
+        </div>
+      </div>
+  
     </div>
   </section>
   
 
   <!-- Bloque 7 -->
-  <section class="bg7">
-    <p class="animate__zoomIn" style="animation-delay: 0s; color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Sólo faltan </p>         
-              
-    <!-- Contenedor de la cuenta regresiva -->
-<div class="cuenta-regresiva">
-  <div class="tiempo animate__zoomIn anim-escondida" id="contadorAnimado" style="--animate-duration: 1.5s;">
-    <div><span id="dias">00</span><small>Días</small></div>
-    <div><span id="horas">00</span><small>Horas</small></div>
-    <div><span id="minutos">00</span><small>Minutos</small></div>
-    <div><span id="segundos">00</span><small>Segundos</small></div>
+<section class="bg7 text-center px-3 py-4">
+  <div class="row justify-content-center">
+
+    <div class="col-12">
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 0s; --animate-duration: 2s;
+                color: #134915;
+                font-size: clamp(42px, 6vw, 46px);
+                font-family: 'Great Vibes', cursive;">
+        Sólo faltan
+      </p>
+
+      <!-- Contenedor de la cuenta regresiva -->
+      <div class="cuenta-regresiva">
+        <div class="tiempo animate__animated animate__zoomIn anim-escondida"
+             id="contadorAnimado"
+             style="--animate-duration: 1.5s;">
+          <div><span id="dias">00</span><small>Días</small></div>
+          <div><span id="horas">00</span><small>Horas</small></div>
+          <div><span id="minutos">00</span><small>Minutos</small></div>
+          <div><span id="segundos">00</span><small>Segundos</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 pt-3">
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 2s; --animate-duration: 2s;
+                color: #9f7d18;
+                font-size: clamp(28px, 5vw, 38px);
+                font-family: 'Great Vibes', cursive;">
+        La pista de baile ya está lista...<br> ¡Sólo faltas tú! <br>
+        Ven a ser parte de este cuento hecho realidad ✨
+      </p>
+    </div>
+
   </div>
-</div>              
+</section>
 
-<p style="padding-top: 12px;"></p>
-
-<p class="animate__zoomIn" style="animation-delay: 1s; color: #134915; font-size: 46px; text-align: center; font-family: 'Great Vibes', cursive;"> Confirmar asistencia <br> <span style="color: #134915; font-size: 22px; text-align: center; font-family: 'Poppins';">vía WhatsApp</span></p> 
-
-<p class="animate__zoomIn" style="animation-delay: 2s; color: #9f7d18; font-size: 38px; text-align: center; font-family: 'Great Vibes', cursive;">La pista de baile ya está lista...
-  ¡Sólo faltas tú! </p>            
-
-  <!-- Botón -->
-<!-- Botón de WhatsApp -->
-<center><a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" 
-target="_blank">
-<img src="img/WhatsApp.svg.webp" class="animate__zoomIn" alt="Confirmar por WhatsApp" style="animation-delay: 3s; width: 80px; height:auto;">
-</a></center>
-  </section>
 
   <!-- Bloque 8 -->
-  <section class="bg8 text-arriba">
-    <p class="animate__zoomIn">
+<section class="bg8 text-center py-4 px-3">
+  <div class="row justify-content-center">
+    
+    <div class="col-12">
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 0s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(42px, 5vw, 52px);">
         ¡Te esperamos!
       </p>
-  </section>
+    </div>
+
+    <div class="col-12">
+      <p class="animate__animated animate__zoomIn"
+         style="animation-delay: 1s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(32px, 5vw, 46px);">
+        Confirmar asistencia <br> 
+        <span style="color: #134915; font-size: clamp(18px, 4vw, 22px); font-family: 'Poppins';">vía WhatsApp</span>
+      </p> 
+
+      <!-- Botón de WhatsApp -->
+      <a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" 
+         target="_blank" class="d-inline-block animate__zoomIn"
+         style="animation-delay: 3s; --animate-duration: 2s;">
+        <img src="img/WhatsApp.svg.webp" alt="Confirmar por WhatsApp" class="img-fluid" style="width: 80px; height: auto;">
+      </a>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Controles de navegación (botones) -->
   <div id="nav-buttons" style="display: none;">
