@@ -42,7 +42,7 @@
 
     .bg1 { background: url('img/SAPO01.jpeg') no-repeat center center/cover; }
     .bg2 { background: url('img/fondo_portada.png') no-repeat center center/cover; }
-    .bg3 { background: url('img/fondo_bloque03.png') no-repeat center center/cover;}
+    .bg3 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; }    
     .bg4 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
     .bg5 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: flex-start; }
     .bg6 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; }
@@ -350,57 +350,7 @@ body, html {
   opacity: 0;
 }
 
-.titulo-bloque {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(40px, 6vw, 52px);
-  color: #134915;
-  margin-bottom: 1rem;
-}
 
-.card-glass {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid transparent;
-  border-radius: 16px;
-  padding: 1rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-
-.card-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #9f7d18, #134915);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-}
-
-.titulo-card {
-  font-family: 'Great Vibes', cursive;
-  color: #134915;
-  font-size: clamp(30px, 5vw, 40px);
-  margin-bottom: 1rem;
-}
-
-.nombre-card {
-  font-family: 'Great Vibes', cursive;
-  color: #9f7d18;
-  font-size: clamp(26px, 4vw, 36px);
-  margin-bottom: 0.5rem;
-}
-
-.medallon-decorativo {
-  width: clamp(80px, 10vw, 120px);
-}
 
 
   </style>
@@ -479,7 +429,7 @@ body, html {
       
 
   <!-- Bloque 3 -->
-  <section class="bg3 text-center px-3 py-4 style="padding-top: 60px;">
+  <section class="bg3 text-center px-3 py-5">
     <div class="row justify-content-center">
       <div class="col-12 col-md-10">
         <p class="animate__animated animate__zoomIn"
@@ -501,36 +451,57 @@ body, html {
  <!-- Bloque 4 -->
  <section class="bg4 text-center px-3 py-5">
   <div class="container">
-    <h2 class="titulo-bloque animate__animated animate__fadeInDown">
+    <h2 class="titulo-bloque animate__animated animate__fadeInDown" style="--animate-duration: 2s;
+    color: #134915;
+    font-size: clamp(38px, 6vw, 52px);
+    font-family: 'Great Vibes', cursive;">
       En compañía de
     </h2>
 
-    <div class="row align-items-center mt-5 gy-4">
+    <div class="row align-items-center mt-3 gy-4">
       <!-- Mis Padres -->
       <div class="col-12 col-md-5">
-        <div class="card card-glass animate__animated animate__zoomIn anim-escondida">
+        <div class="card animate__animated animate__zoomIn anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
           <div class="card-body">
-            <h5 class="titulo-card">Mis Padres</h5>
-            <p class="nombre-card">Ivon Chávez García</p>
-            <p class="nombre-card">José Carlos Infante Arenas</p>
+            <h5 class="titulo-card" style="--animate-duration: 2s;
+            color: #134915;
+            font-size: clamp(36px, 6vw, 52px);
+            font-family: 'Great Vibes', cursive;">Mis Padres</h5>
+            <p class="nombre-card" style="animation-delay: 1s; --animate-duration: 2s;
+            color: #9f7d18;
+            font-size: clamp(18px, 5vw, 36px);
+            font-family: 'Poppins';"> Ivon Chávez García</p>
+            <p class="nombre-card" style="animation-delay: 1s; --animate-duration: 2s;
+            color: #9f7d18;
+            font-size: clamp(18px, 5vw, 36px);
+            font-family: 'Poppins';"">José Carlos Infante Arenas</p>
           </div>
         </div>
       </div>
 
-      <!-- Medallón decorativo central -->
-      <div class="col-12 col-md-2 d-flex justify-content-center">
-        <img src="img/adorno_central.png"
-             alt="Decoración"
-             class="medallon-decorativo animate__animated animate__zoomIn animate__delay-1s">
-      </div>
+     <!-- Medallón decorativo central -->
+<div class="col-12 col-md-2 d-flex justify-content-center">
+  <img src="img/divisor01.png"
+       alt="Decoración"
+       class="img-fluid medallon-decorativo animate__animated animate__zoomIn animate__delay-2s" >
+</div>
 
       <!-- Mis Padrinos -->
       <div class="col-12 col-md-5">
-        <div class="card card-glass animate__animated animate__zoomIn anim-escondida">
+        <div class="card card-glass animate__animated animate__zoomIn animate__delay-3s anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
           <div class="card-body">
-            <h5 class="titulo-card">Mis Padrinos</h5>
-            <p class="nombre-card">Lina Miriam Chávez García</p>
-            <p class="nombre-card">Cristian Toledano Huipio</p>
+            <h5 class="titulo-card" style="--animate-duration: 2s;
+            color: #134915;
+            font-size: clamp(36px, 6vw, 52px);
+            font-family: 'Great Vibes', cursive;">Mis Padrinos</h5>
+            <p class="nombre-card" style="animation-delay: 1s; --animate-duration: 2s;
+            color: #9f7d18;
+            font-size: clamp(18px, 5vw, 36px);
+            font-family: 'Poppins';">Lina M. Chávez García</p>
+            <p class="nombre-card" style="animation-delay: 1s; --animate-duration: 2s;
+            color: #9f7d18;
+            font-size: clamp(18px, 5vw, 36px);
+            font-family: 'Poppins';">Cristian Toledano Huipio</p>
           </div>
         </div>
       </div>
