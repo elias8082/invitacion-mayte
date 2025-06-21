@@ -44,10 +44,10 @@
     .bg2 { background: url('img/fondo_portada.png') no-repeat center center/cover; }
     .bg3 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; }    
     .bg4 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
-    .bg5 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: flex-start; }
-    .bg6 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; }
-    .bg7 { background: url('img/fondo_bloque06.png') no-repeat center center/cover; justify-content: flex-start; }
-    .bg8 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg5 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg6 { background: url('img/fondo_bloque03.png') no-repeat center center/cover; justify-content: flex-start; }
+    .bg7 { background: url('img/fondo_bloque04.png') no-repeat center center/cover; justify-content: center; }
+    .bg8 { background: url('img/fondo_bloque05.png') no-repeat center center/cover; justify-content: center; }
 
     h1, h2, p {
       margin-bottom: 1rem;
@@ -145,6 +145,10 @@
         /*margin-top: 3rem;*/
         margin-left: 16px;
         margin-right: 16px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 10px;
+        backdrop-filter: blur(4px);
     }
 
     .cuenta-regresiva h2 {
@@ -350,7 +354,14 @@ body, html {
   opacity: 0;
 }
 
-
+@keyframes resplandor {
+  0% {
+    box-shadow: 0 0 10px #9f7d18, 0 0 20px #9f7d18 inset;
+  }
+  100% {
+    box-shadow: 0 0 25px #9f7d18, 0 0 35px #9f7d18 inset;
+  }
+}
 
 
   </style>
@@ -451,17 +462,17 @@ body, html {
  <!-- Bloque 4 -->
  <section class="bg4 text-center px-3 py-5">
   <div class="container">
-    <h2 class="titulo-bloque animate__animated animate__fadeInDown" style="--animate-duration: 2s;
+    <p class="titulo-bloque animate__animated animate__zoomIn" style="--animate-duration: 2s;
     color: #134915;
     font-size: clamp(38px, 6vw, 52px);
     font-family: 'Great Vibes', cursive;">
       En compañía de
-    </h2>
+    </p>
 
     <div class="row align-items-center mt-3 gy-4">
       <!-- Mis Padres -->
       <div class="col-12 col-md-5">
-        <div class="card animate__animated animate__zoomIn anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
+        <div class="card animate__animated animate__zoomIn animate__delay-1s anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
           <div class="card-body">
             <h5 class="titulo-card" style="--animate-duration: 2s;
             color: #134915;
@@ -483,12 +494,12 @@ body, html {
 <div class="col-12 col-md-2 d-flex justify-content-center">
   <img src="img/divisor01.png"
        alt="Decoración"
-       class="img-fluid medallon-decorativo animate__animated animate__zoomIn animate__delay-1s" >
+       class="img-fluid medallon-decorativo animate__animated animate__zoomIn animate__delay-2s" >
 </div>
 
       <!-- Mis Padrinos -->
       <div class="col-12 col-md-5">
-        <div class="card card-glass animate__animated animate__zoomIn animate__delay-2s anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
+        <div class="card card-glass animate__animated animate__zoomIn animate__delay-3s anim-escondida" style="border: 1px solid #9f7d18; border-radius: 10px;">
           <div class="card-body">
             <h5 class="titulo-card" style="--animate-duration: 2s;
             color: #134915;
@@ -525,106 +536,67 @@ body, html {
         ¡Te invito a celebrar!
       </p>
 
-      <!--<p class="animate__animated animate__zoomIn"
-         style="animation-delay: 1s; --animate-duration: 2s;
-                color: #9f7d18;
-                font-size: clamp(28px, 5vw, 36px);
-                font-family: 'Great Vibes', cursive;">
-        A que me acompañes a celebrar una noche mágica...
-      </p>-->
+     
     </div>
 
-    <div class="col-12 pt-3">
+    <div class="col-12 ">
       <p class="animate__animated animate__zoomIn animate__delay-1s"
-         style="animation-delay: 2s; --animate-duration: 2s;
-                color: #134915;
-                font-size: clamp(30px, 5vw, 40px);
-                font-family: 'Great Vibes', cursive;">
-        Sábado <br> <span style=" color: #9f7d18;
+         style=" color: #9f7d18;
         font-size: clamp(18px, 5vw, 36px);
-        font-family: 'Poppins';"> 2 de agosto de 2025</span>
+        font-family: 'Poppins';"> Sábado 2 de agosto de 2025
       </p>      
     </div>
 
-    <div class="col-12 pt-3">
+    <div class="col-12 pt-3 animate__animated animate__zoomIn animate__delay-2s">
       <i class="fa-solid fa-church" style="font-size: 28px; color: #134915; margin-bottom: 8px;"></i>
+      <span style="display: block; font-family: 'Poppins'; font-size: 16px; color: #134915;">Parroquia</span> 
       <p style="font-family: 'Poppins'; color: #9f7d18; font-size: clamp(18px, 5vw, 36px);">        
-        Parroquia de la Resurrección del Señor<br>
+        La Resurrección del Señor<br>
         Hora: 18:00 hrs
 
-      </p>  
+      </p> 
+      
+      <!-- Botón de ubicación -->
+  <a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56"
+  target="_blank"
+  style="display: inline-block; margin-top: 10px; padding: 8px 16px;
+         font-size: 16px; color: #fff; background-color: #134915;
+         border: none; border-radius: 8px; text-decoration: none;
+         font-family: 'Poppins'; transition: background-color 0.3s;">
+ <i class="fa-solid fa-map-location-dot" style="margin-right: 6px;"></i>
+ Ver ubicación
+</a>
+
+</div>
+
+<p style="padding-top: 24px;"></p>
+
+<div class="col-12 pt-3 animate__animated animate__zoomIn animate__delay-3s">
       <i class="fa-solid fa-location-dot" style="font-size: 28px; color: #134915; margin-bottom: 8px;"></i>
-      <p style="font-family: 'Poppins'; color: #9f7d18; font-size: clamp(18px, 5vw, 36px);">Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.</p>    
+      <span style="display: block; font-family: 'Poppins'; font-size: 16px; color: #134915;">Recepción</span>
+      <p style="font-family: 'Poppins'; color: #9f7d18; font-size: clamp(18px, 5vw, 36px);">Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.</p>  
+      
+      <!-- Botón de ubicación -->
+  <a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89"
+  target="_blank"
+  style="display: inline-block; margin-top: 10px; padding: 8px 16px;
+         font-size: 16px; color: #fff; background-color: #134915;
+         border: none; border-radius: 8px; text-decoration: none;
+         font-family: 'Poppins'; transition: background-color 0.3s;">
+ <i class="fa-solid fa-map-location-dot" style="margin-right: 6px;"></i>
+ Ver ubicación
+</a>
     </div>
 
   </div>
 </section>
 
 
-  <!-- Bloque 6 -->
-  <section class="bg6 text-center px-3 " style="padding-top: 60px;">
-    <div class="row justify-content-center">
   
-      <div class="col-12">
-        <p class="animate__animated animate__fadeInLeft"
-           style="--animate-duration: 2s;
-                  font-family: 'Great Vibes', cursive;
-                  color: #134915;
-                  font-size: clamp(42px, 5vw, 52px);">
-          Ceremonia
-        </p>
-  
-        <p class="animate__animated animate__zoomIn animate__delay-1s"
-           style="--animate-duration: 2s;
-                  font-family: 'Great Vibes', cursive;
-                  color: #9f7d18;
-                  font-size: clamp(30px, 4vw, 36px);">
-          Parroquia de la Resurrección del Señor<br>
-          Hora: 18:00 hrs
-        </p>
-  
-        <div class="animate__animated animate__zoomIn animate__delay-2s"
-             style="--animate-duration: 2s;">
-          <a href="https://maps.app.goo.gl/PdWDE5R9mvo8zUM56" target="_blank"
-             class="boton-maps-elegante d-inline-block mt-2">
-            <i class="fas fa-map-marker-alt"></i> Ver ubicación
-          </a>
-        </div>
-      </div>
-  
-      <!-- Espaciado entre bloques -->
-      <div class="col-12 pt-4">
-        <p class="animate__animated animate__zoomIn animate__delay-4s"
-           style="--animate-duration: 2s;
-                  font-family: 'Great Vibes', cursive;
-                  color: #134915;
-                  font-size: clamp(42px, 5vw, 46px);">
-          Recepción
-        </p>
-  
-        <p class="animate__animated animate__zoomIn animate__delay-5s"
-           style="--animate-duration: 2s;
-                  font-family: 'Great Vibes', cursive;
-                  color: #9f7d18;
-                  font-size: clamp(30px, 4vw, 36px);">
-          Calle Itzopan, mz B43, lt 33 <br>Col. Azteca 3ra.
-        </p>
-  
-        <div class="animate__animated animate__zoomIn animate__delay-6s"
-             style="--animate-duration: 2s;">
-          <a href="https://maps.app.goo.gl/ugWyRYEqWpw4pbJ89" target="_blank"
-             class="boton-maps-elegante d-inline-block mt-2">
-            <i class="fas fa-map-marker-alt"></i> Ver ubicación
-          </a>
-        </div>
-      </div>
-  
-    </div>
-  </section>
   
 
   <!-- Bloque 7 -->
-<section class="bg7 text-center px-3 " style="padding-top: 60px;">
+<section class="bg7 text-center px-3 ">
   <div class="row justify-content-center">
 
     <div class="col-12">
@@ -635,10 +607,11 @@ body, html {
                 font-family: 'Great Vibes', cursive;">
         Sólo faltan
       </p>
+      
 
       <!-- Contenedor de la cuenta regresiva -->
       <div class="cuenta-regresiva">
-        <div class="tiempo animate__animated animate__zoomIn anim-escondida"
+        <div class="tiempo animate__animated animate__zoomIn anim-escondida animate__delay-1s"
              id="contadorAnimado"
              style="--animate-duration: 1.5s;">
           <div><span id="dias">00</span><small>Días</small></div>
@@ -649,15 +622,33 @@ body, html {
       </div>
     </div>
 
+    
     <div class="col-12 pt-3">
-      <p class="animate__animated animate__zoomIn"
-         style="animation-delay: 2s; --animate-duration: 2s;
+      <p class="animate__animated animate__zoomIn animate__delay-2s"
+         style=" --animate-duration: 2s;
                 color: #9f7d18;
-                font-size: clamp(28px, 5vw, 38px);
-                font-family: 'Great Vibes', cursive;">
-        La pista de baile ya está lista...<br> ¡Sólo faltas tú! <br>
-        Ven a ser parte de este cuento hecho realidad ✨
+                font-size: clamp(18px, 5vw, 38px);
+                font-family: 'Poppins';">
+        La pista de baile ya está lista...<br> ¡Sólo faltas tú! 
       </p>
+    </div>
+
+    <!-- Medallón decorativo central -->
+    <div class="col-12 col-md-2 d-flex justify-content-center img-fluid animate__animated animate__zoomIn animate__delay-3s">
+      <div style="
+        background: radial-gradient(circle, #fffbea, #e6dabf);
+        padding: 12px;
+        border-radius: 50%;
+        border: 4px solid #9f7d18;
+        box-shadow: 0 0 20px #9f7d18;
+        animation: resplandor 2.5s infinite alternate;
+        display: inline-block;">
+        
+        <img src="img/gif_princesa.gif"
+             alt="Decoración Princesa"
+             class="img-fluid animate__animated animate__zoomIn animate__delay-4s"
+             style="border-radius: 50%; width: 250px; max-width: 100%;">
+      </div>
     </div>
 
   </div>
@@ -665,7 +656,7 @@ body, html {
 
 
   <!-- Bloque 8 -->
-<section class="bg8 text-center px-3 " style="padding-top: 60px;">
+<section class="bg8 text-center px-3 ">
   <div class="row justify-content-center">
     
     <div class="col-12">
@@ -673,11 +664,21 @@ body, html {
          style="animation-delay: 0s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(42px, 5vw, 52px);">
         ¡Te esperamos!
       </p>
+      <p class="animate__animated animate__zoomIn" style="animation-delay: 1s; --animate-duration: 2s; font-family: 'Poppins'; color: #9f7d18; font-size: clamp(18px, 5vw, 36px);">Ven a ser parte de este cuento hecho realidad ✨</p>
     </div>
+
+
+     <!-- Medallón decorativo central -->
+<div class="col-12 col-md-2 d-flex justify-content-center">
+  <img src="img/divisor01.png"
+       alt="Decoración"
+       class="img-fluid medallon-decorativo animate__animated animate__zoomIn animate__delay-2s" >
+</div>
+
 
     <div class="col-12">
       <p class="animate__animated animate__zoomIn"
-         style="animation-delay: 1s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(32px, 5vw, 46px);">
+         style="animation-delay: 3s; --animate-duration: 2s; font-family: 'Great Vibes', cursive; color: #134915; font-size: clamp(32px, 5vw, 46px);">
         Confirmar asistencia <br> 
         <span style="color: #134915; font-size: clamp(18px, 4vw, 22px); font-family: 'Poppins';">vía WhatsApp</span>
       </p> 
@@ -685,7 +686,7 @@ body, html {
       <!-- Botón de WhatsApp -->
       <a href="https://wa.me/5215565552581?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20los%20XV%20años%20de%20Lia%20Mayte%20" 
          target="_blank" class="d-inline-block animate__zoomIn"
-         style="animation-delay: 3s; --animate-duration: 2s;">
+         style="animation-delay: 4s; --animate-duration: 2s;">
         <img src="img/WhatsApp.svg.webp" alt="Confirmar por WhatsApp" class="img-fluid" style="width: 80px; height: auto;">
       </a>
     </div>
@@ -918,7 +919,7 @@ function reiniciarAnimacion(elemento) {
 
 document.addEventListener('DOMContentLoaded', () => {
   // AQUI ES IMPORTANTE POR QUE SE DECLARAN LO QUE QUEREMOS QUE TENGA ANIMACION COM P. IMG. ETC
-  const animElements = document.querySelectorAll('p[class*="animate__"], img[class*="animate__"], .tiempo[class*="animate__"], a[class*="animate__"], .card[class*="animate__"]');
+  const animElements = document.querySelectorAll('p[class*="animate__"], img[class*="animate__"], .tiempo[class*="animate__"], a[class*="animate__"], .card[class*="animate__"], div[class*="animate__"]');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
